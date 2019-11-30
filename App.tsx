@@ -1,19 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
+import LoginScreen from './src/screens/LoginScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const App = createStackNavigator(
+  {
+    LoginScreen: { screen: LoginScreen }
   },
-});
+  {
+    defaultNavigationOptions: {
+      headerTitle: 'Polaris',
+      headerStyle: {
+        backgroundColor: '#3F52B5',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2
+      },
+      headerTitleStyle: {
+        color: '#FFF',
+        fontSize: 20,
+        fontWeight: 'bold'
+      },
+      headerTintColor: '#FFF',
+      headerBackTitle: null
+    }
+  }
+);
+
+export default createAppContainer(App);
