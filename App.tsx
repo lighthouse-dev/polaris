@@ -6,6 +6,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import LoginScreen from './src/screens/LoginScreen';
 import TodoListScreen from './src/screens/TodoListScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 import ENV from './env.json';
 
 require('firebase/firestore');
@@ -56,6 +57,7 @@ const App = createStackNavigator({
       headerShown: false
     }
   },
+  SignUpScreen: { screen: SignUpScreen },
   TabScreen: {
     screen: TabScreen,
     navigationOptions: {

@@ -105,7 +105,7 @@ class LoginScreen extends React.Component {
           style={styles.signup}
           onPress={this.handlePress.bind(this)}
         >
-          <Text style={styles.signupText}> ➕ Sign up </Text>
+          <Text style={styles.signupText}> ➕ Create account </Text>
         </TouchableOpacity>
       </View>
     );
