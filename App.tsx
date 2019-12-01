@@ -1,11 +1,11 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import firebase from 'firebase';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import firebase from 'firebase';
-
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import LoginScreen from './src/screens/LoginScreen';
 import TodoListScreen from './src/screens/TodoListScreen';
+import MemoListScreen from './src/screens/MemoListScreen';
 import ENV from './env.json';
 
 require('firebase/firestore');
@@ -22,36 +22,59 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-const App = createStackNavigator(
+const TabScreen = createMaterialTopTabNavigator(
   {
-    LoginScreen: { screen: LoginScreen },
-    TodoListScreen: { screen: TodoListScreen }
+    TODO: { screen: TodoListScreen },
+    MEMO: { screen: MemoListScreen }
   },
   {
-    defaultNavigationOptions: {
-      headerTitle: 'Polaris',
-      headerStyle: {
-        backgroundColor: '#ffffff',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        ...Platform.select({
-          ios: {},
-          android: {
-            height: 60
-          }
-        })
+    tabBarPosition: 'top',
+    swipeEnabled: true,
+    tabBarOptions: {
+      activeTintColor: '#333333',
+      inactiveTintColor: '#333333',
+      style: {
+        backgroundColor: '#FFFFFF'
       },
-      headerTitleStyle: {
-        color: '#333333',
-        fontSize: 20,
+      labelStyle: {
+        textAlign: 'center',
         fontWeight: 'bold'
       },
-      headerTintColor: '#FFF',
-      headerBackTitle: null
+      indicatorStyle: {
+        borderBottomColor: '#3F52B5',
+        borderBottomWidth: 2
+      }
     }
   }
 );
 
+//making a StackNavigator to export as default
+const App = createStackNavigator({
+  LoginScreen: {
+    screen: LoginScreen,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
+  TabScreen: {
+    screen: TabScreen,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#3F52B5',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2
+      },
+      headerTitleStyle: {
+        color: '#FFF',
+        fontSize: 16,
+        fontWeight: 'bold'
+      },
+      headerTintColor: '#FFFFFF',
+      title: 'POLARIS',
+      headerBackTitle: null
+    }
+  }
+});
 export default createAppContainer(App);

@@ -43,7 +43,7 @@ class LoginScreen extends React.Component {
   navigateToHome() {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'TodoListScreen' })]
+      actions: [NavigationActions.navigate({ routeName: 'TabScreen' })]
     });
 
     this.props.navigation.dispatch(resetAction);
@@ -69,7 +69,7 @@ class LoginScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Loading text="Loading..." isLoading={this.state.isLoading} />
-        <Text style={styles.title}> ログイン </Text>
+        <Text style={styles.title}> POLARIS </Text>
         <TextInput
           style={styles.input}
           value={this.state.email}
@@ -96,7 +96,7 @@ class LoginScreen extends React.Component {
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleSubmit.bind(this)}
-          underlayColor="#c93467"
+          underlayColor="#3c4a8c"
         >
           <Text style={styles.buttonTitle}>Login</Text>
         </TouchableHighlight>
@@ -116,27 +116,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    paddingTop: '50%',
     padding: 24,
     backgroundColor: '#FFF'
   },
   title: {
-    fontSize: 30,
+    fontSize: 35,
     alignSelf: 'center',
-    marginBottom: 24,
+    marginBottom: 20,
     fontWeight: 'bold'
   },
   input: {
-    backgroundColor: '#EEE',
+    backgroundColor: '#fafafa',
     height: 48,
     marginBottom: 16,
     borderWidth: 1,
     borderColor: '#DDD',
-    padding: 8
+    borderRadius: 10,
+    padding: 15
   },
   button: {
-    backgroundColor: '#FF4181',
+    backgroundColor: '#3F52B5',
     height: 48,
-    borderRadius: 5,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
