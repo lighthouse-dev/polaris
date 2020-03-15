@@ -1,53 +1,27 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableHighlight,
-  FlatList
-} from 'react-native';
-import { List, CheckBox, Layout } from '@ui-kitten/components';
-
-const dateString = date => {
-  if (date == null) {
-    return '';
-  }
-
-  return date
-    .toDate()
-    .toISOString()
-    .split('T')[0];
-};
+import { StyleSheet, View } from 'react-native';
+import { List, CheckBox } from '@ui-kitten/components';
 
 class TodoList extends React.Component {
-  state = {
-    fontLoaded: false
-  };
-
-  async componentWillMount() {
-    await Font.loadAsync({ FontAwesome: fontAwesome });
-    this.setState({ fontLoaded: true });
-  }
-
-  todoItem({ item, index }) {
+  todoItem({ item }) {
     const onCheckedChange = isChecked => {
       item.completed = !!item.completed;
     };
     return (
-      <Layout>
-        <CheckBox
-          text={item.title.substring(0, 20)}
-          checked={item.completed}
-          onChange={onCheckedChange}
-        />
-      </Layout>
+      <CheckBox
+        text={item.title.substring(0, 20)}
+        checked={item.completed}
+        onChange={onCheckedChange}
+        style={styles.checkbox}
+      />
     );
   }
 
   render() {
     return (
-      <View style={styles.todoList}>
+      <View style={styles.container}>
         <List
+          style={{ backgroundColor: '#fff' }}
           data={this.props.todoList}
           renderItem={this.todoItem.bind(this)}
         />
@@ -57,26 +31,17 @@ class TodoList extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  todoList: {
+  container: {
+    flex: 1,
     width: '100%',
-    flex: 1
+    backgroundColor: '#fff'
   },
-  todoListItem: {
-    marginBottom: -7
-  },
-  todoTitle: {
-    fontSize: 18,
-    marginBottom: 4
+  checkbox: {
+    margin: 8
   },
   todoDate: {
     fontSize: 12,
     color: '#a2a2a2'
-  },
-  unChecked: {
-    fontFamily: 'FontAwesome',
-    fontSize: 25,
-    lineHeight: 32,
-    color: '#3F52B5'
   }
 });
 
