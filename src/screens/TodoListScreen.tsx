@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import firebase from 'firebase';
+import { Modal } from '@ui-kitten/components';
 import TodoList from '../components/TodoList';
 import CircleButton from '../../src/elements/CircleButton';
+import ModalItem from '../../src/elements/ModalItem';
 // import { Button, Input, Overlay } from 'react-native-elements';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -40,9 +42,12 @@ class TodoListScreen extends React.Component {
     );
   }
 
-  handlePress() {
-    // alert(11);
+  openAddTaskModal() {
     this.setState({ isVisible: true });
+  }
+
+  addTask() {
+    this.setState({ isVisible: false });
   }
 
   render() {
@@ -52,7 +57,10 @@ class TodoListScreen extends React.Component {
           todoList={this.state.todoList}
           navigation={this.props.navigation}
         />
-        <CircleButton name="plus" onPress={this.handlePress.bind(this)} />
+        <CircleButton name="plus" onPress={this.openAddTaskModal.bind(this)} />
+        <Modal visible={this.state.isVisible}>
+          <ModalItem onPress={this.addTask.bind(this)} />
+        </Modal>
         {/* <Overlay
           isVisible={this.state.isVisible}
           onBackdropPress={() => {
@@ -92,7 +100,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    padding: 24,
+    paddingTop: 24,
+    paddingBottom: 24,
+    paddingLeft: 12,
+    paddingRight: 6,
     backgroundColor: '#FFF'
   },
   title: {
