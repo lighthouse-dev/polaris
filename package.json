@@ -8,6 +8,9 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@eva-design/eva": "^1.4.0",
+    "@ui-kitten/components": "^4.4.1",
+    "@ui-kitten/eva-icons": "^4.4.1",
     "expo": "^35.0.0",
     "expo-secure-store": "^7.0.0",
     "firebase": "^7.5.0",
@@ -16,6 +19,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-reanimated": "^1.4.0",
+    "react-native-svg": "9.9.5",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3",

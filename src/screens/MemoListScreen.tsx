@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import InputItem from '../elements/InputItem';
 
 class MemoListScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}> MEMO LIST </Text>
+        <InputItem />
       </View>
     );
   }

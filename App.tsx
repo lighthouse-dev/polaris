@@ -3,6 +3,10 @@ import firebase from 'firebase';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { mapping, light as theme } from '@eva-design/eva';
+
 import LoginScreen from './src/screens/LoginScreen';
 import TodoListScreen from './src/screens/TodoListScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
@@ -50,7 +54,7 @@ const TabScreen = createMaterialTopTabNavigator(
 );
 
 //making a StackNavigator to export as default
-const App = createStackNavigator({
+const StackNavigator = createStackNavigator({
   LoginScreen: {
     screen: LoginScreen,
     navigationOptions: {
@@ -79,4 +83,16 @@ const App = createStackNavigator({
     }
   }
 });
-export default createAppContainer(App);
+
+const AppContainer = createAppContainer(StackNavigator);
+
+const App = () => (
+  <React.Fragment>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider mapping={mapping} theme={theme}>
+      <AppContainer />
+    </ApplicationProvider>
+  </React.Fragment>
+);
+
+export default App;
