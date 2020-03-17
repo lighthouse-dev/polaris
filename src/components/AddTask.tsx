@@ -1,16 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button, Layout, Input, Icon } from '@ui-kitten/components';
 
 export interface AddTaskProps {
-  onPress: () => void;
+  onPress: (title: string) => void;
 }
 
 export const AddTask = (props: AddTaskProps): React.ReactElement => {
   const StarIcon = style => <Icon {...style} name="plus" />;
   const [title, settitle] = React.useState<string>();
   const { onPress } = props;
-  const { height, width } = Dimensions.get('window');
 
   return (
     // TODO: 入力欄以外のところをタップすると、　入力欄を隠す
@@ -26,7 +25,9 @@ export const AddTask = (props: AddTaskProps): React.ReactElement => {
           style={styles.addTaskButton}
           status="primary"
           icon={StarIcon}
-          onPress={onPress}
+          onPress={() => {
+            onPress(title);
+          }}
         />
       </Layout>
     </View>
