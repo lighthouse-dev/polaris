@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { Header } from 'react-navigation-stack';
+import { Layout } from '@ui-kitten/components';
 import firebase from 'firebase';
-import { Modal } from '@ui-kitten/components';
+
 import TodoList from '../components/TodoList';
 import CircleButton from '../../src/elements/CircleButton';
-import ModalItem from '../../src/elements/ModalItem';
-// import { Button, Input, Overlay } from 'react-native-elements';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import AddTask from '../components/AddTask';
 
+// TODO: 必要なければ消す
 const dateString = date => {
   if (date == null) {
     return '';
@@ -19,6 +20,8 @@ const dateString = date => {
     .split('T')[0];
 };
 
+// TODO: ↓の書き方に修正
+// export const KeyboardAvoidingView = (props): React.ReactElement => {
 class TodoListScreen extends React.Component {
   state = {
     todoList: [],
@@ -52,46 +55,26 @@ class TodoListScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TodoList
-          todoList={this.state.todoList}
-          navigation={this.props.navigation}
-        />
-        <CircleButton name="plus" onPress={this.openAddTaskModal.bind(this)} />
-        <Modal visible={this.state.isVisible}>
-          <ModalItem onPress={this.addTask.bind(this)} />
-        </Modal>
-        {/* <Overlay
-          isVisible={this.state.isVisible}
-          onBackdropPress={() => {
-            this.setState({ isVisible: false });
-          }}
-          overlayStyle={{
-            height: 100,
-            width: '100%',
-            position: 'absolute',
-            bottom: 0
-          }}
-        >
-          <Input
-            placeholder="Input Task"
-            leftIcon={<Icon name="check" size={24} color="green" />}
-            inputContainerStyle={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              width: '80%'
-            }}
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={Header.HEIGHT + 60}
+        style={{ flex: 1 }}
+        behavior="padding"
+      >
+        <Layout style={styles.container}>
+          <TodoList
+            todoList={this.state.todoList}
+            navigation={this.props.navigation}
           />
-          <Button
-            buttonStyle={styles.addBtn}
-            icon={<Icon name="check" size={24} color="white" />}
-            titleStyle={{ fontWeight: 'bold' }}
-            onPress={() => {
-              alert(1);
-            }}
-          />
-        </Overlay> */}
-      </View>
+          {this.state.isVisible ? (
+            <AddTask onPress={this.addTask.bind(this)} />
+          ) : (
+            <CircleButton
+              name="plus"
+              onPress={this.openAddTaskModal.bind(this)}
+            />
+          )}
+        </Layout>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -99,11 +82,8 @@ class TodoListScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    paddingTop: 24,
-    paddingBottom: 24,
-    paddingLeft: 12,
-    paddingRight: 6,
+    paddingHorizontal: 16,
+    paddingVertical: 24,
     backgroundColor: '#FFF'
   },
   title: {
@@ -111,11 +91,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 24,
     fontWeight: 'bold'
-  },
-  addBtn: {
-    display: 'flex',
-    alignItems: 'flex-end',
-    width: 40
   }
 });
 
