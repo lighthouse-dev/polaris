@@ -21,12 +21,7 @@ const dateString = date => {
     .split('T')[0];
 };
 
-export interface TaskProps {
-  todoList: [];
-  isVisible: boolean;
-}
-
-export const TodoListScreen = (props: TaskProps): React.ReactElement => {
+export const TodoListScreen = (): React.ReactElement => {
   const { navigate } = useNavigation();
   const [todoList, setTodoList] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
