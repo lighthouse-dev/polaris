@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-navigation-stack';
 import { Layout } from '@ui-kitten/components';
 import firebase from 'firebase';
