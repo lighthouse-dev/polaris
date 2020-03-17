@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-navigation-stack';
 import { Layout } from '@ui-kitten/components';
+import { useNavigation } from 'react-navigation-hooks';
 import firebase from 'firebase';
 
 import TodoList from '../components/TodoList';
@@ -20,16 +21,19 @@ const dateString = date => {
     .split('T')[0];
 };
 
-// TODO: ↓の書き方に修正
-// export const KeyboardAvoidingView = (props): React.ReactElement => {
-class TodoListScreen extends React.Component {
-  state = {
-    todoList: [],
-    isVisible: false
-  };
+export interface TaskProps {
+  todoList: [];
+  isVisible: boolean;
+}
 
-  // MemoListScreenコンポーネントがマウント（表示)される前に実行
-  componentWillMount() {
+export const TodoListScreen = (props: TaskProps): React.ReactElement => {
+  const { navigate } = useNavigation();
+  const [todoList, setTodoList] = React.useState([]);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  // MemoListScreenコンポーネントのマウント時に実行
+  useEffect(() => {
+    // Your code here
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
     db.collection(`groups/${currentUser.uid}:default/tasks`).onSnapshot(
@@ -40,44 +44,36 @@ class TodoListScreen extends React.Component {
           tempTodoList.push({ key: doc.id, ...doc.data() });
         });
 
-        this.setState({ todoList: tempTodoList });
+        setTodoList(tempTodoList);
       }
     );
-  }
+  }, []);
 
-  openAddTaskModal() {
-    this.setState({ isVisible: true });
-  }
+  const openAddTask = () => {
+    setIsVisible(true);
+  };
 
-  addTask() {
-    this.setState({ isVisible: false });
-  }
+  const closeAddTask = () => {
+    setIsVisible(false);
+  };
 
-  render() {
-    return (
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={Header.HEIGHT + 60}
-        style={{ flex: 1 }}
-        behavior="padding"
-      >
-        <Layout style={styles.container}>
-          <TodoList
-            todoList={this.state.todoList}
-            navigation={this.props.navigation}
-          />
-          {this.state.isVisible ? (
-            <AddTask onPress={this.addTask.bind(this)} />
-          ) : (
-            <CircleButton
-              name="plus"
-              onPress={this.openAddTaskModal.bind(this)}
-            />
-          )}
-        </Layout>
-      </KeyboardAvoidingView>
-    );
-  }
-}
+  return (
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={Header.HEIGHT + 60}
+      style={{ flex: 1 }}
+      behavior="padding"
+    >
+      <Layout style={styles.container}>
+        <TodoList todoList={todoList} navigation={navigate} />
+        {isVisible ? (
+          <AddTask onPress={closeAddTask} />
+        ) : (
+          <CircleButton name="plus" onPress={openAddTask} />
+        )}
+      </Layout>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
