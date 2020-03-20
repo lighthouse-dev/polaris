@@ -15,6 +15,7 @@ export const AddTask = (props: AddTaskProps): React.ReactElement => {
     // TODO: 入力欄以外のところをタップすると、　入力欄を隠す
     <View style={styles.container}>
       <Layout level="3" style={styles.modal}>
+        {/* TODO: 期限日を指定できるようにする（カレンダー） */}
         <Input
           style={styles.taskInput}
           placeholder="タスクを入力してください"

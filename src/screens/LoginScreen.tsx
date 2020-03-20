@@ -12,6 +12,7 @@ import firebase from 'firebase';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Loading from '../elements/Loading';
 
+// TODO: ログイン、会員登録画面「ui-kitten」に合わせてデザイン修正
 class LoginScreen extends React.Component {
   state = {
     email: '',
