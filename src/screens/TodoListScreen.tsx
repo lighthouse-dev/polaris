@@ -46,6 +46,14 @@ export const TodoListScreen = (): React.ReactElement => {
 
   // MemoListScreenコンポーネントのマウント時に実行
   useEffect(() => {
+    getTaskList();
+  }, []);
+
+  const openAddTask = () => {
+    setIsVisible(true);
+  };
+
+  const getTaskList = () => {
     // TODO: 日付でsort
     db.collection(`groups/${currentUser.uid}:default/tasks`).onSnapshot(
       snapshot => {
@@ -58,10 +66,6 @@ export const TodoListScreen = (): React.ReactElement => {
         setTodoList(tempTodoList);
       }
     );
-  }, []);
-
-  const openAddTask = () => {
-    setIsVisible(true);
   };
 
   const addTask = (title: string) => {
