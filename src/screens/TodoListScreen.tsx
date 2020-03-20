@@ -9,7 +9,10 @@ import TodoList from '../components/TodoList';
 import CircleButton from '../../src/elements/CircleButton';
 import AddTask from '../components/AddTask';
 
-type Task = {
+export type TodoList = Task[];
+
+export type Task = {
+  key?: string;
   title: string; // "内容",
   detail: string; // "詳細",
   completed: boolean; // false,
@@ -36,7 +39,7 @@ const dateString = date => {
 
 export const TodoListScreen = (): React.ReactElement => {
   const { navigate } = useNavigation();
-  const [todoList, setTodoList] = React.useState([]);
+  const [todoList, setTodoList] = React.useState<Task[] | []>([]);
   const [isVisible, setIsVisible] = React.useState(false);
   const { currentUser } = firebase.auth();
   const db = firebase.firestore();
@@ -46,10 +49,10 @@ export const TodoListScreen = (): React.ReactElement => {
     // TODO: 日付でsort
     db.collection(`groups/${currentUser.uid}:default/tasks`).onSnapshot(
       snapshot => {
-        const tempTodoList = [];
+        const tempTodoList: TodoList = [];
 
         snapshot.forEach(doc => {
-          tempTodoList.push({ key: doc.id, ...doc.data() });
+          tempTodoList.push({ key: doc.id, ...doc.data() } as Task);
         });
 
         setTodoList(tempTodoList);
@@ -63,6 +66,7 @@ export const TodoListScreen = (): React.ReactElement => {
 
   const addTask = (title: string) => {
     const currentDate = new Date();
+    // TODO: title以外の情報もちゃんと入るようにする
     const data: Task = {
       title: title,
       detail: '詳細',
@@ -76,11 +80,25 @@ export const TodoListScreen = (): React.ReactElement => {
       update_date: currentDate
     };
 
+    // TODO: firebase関連処理を一つのファイル（utils?）にまとめる
     db.collection(`groups/${currentUser.uid}:default/tasks`)
       .doc()
       .set(data)
       .then(() => {
         setIsVisible(false);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  const updateTaskCompleted = (key: string, checked: boolean) => {
+    db.collection(`groups/${currentUser.uid}:default/tasks`)
+      .doc(key)
+      .update({ completed: checked })
+      .then(() => {})
+      .catch(err => {
+        console.error(err);
       });
   };
 
@@ -91,7 +109,12 @@ export const TodoListScreen = (): React.ReactElement => {
       behavior="padding"
     >
       <Layout style={styles.container}>
-        <TodoList todoList={todoList} navigation={navigate} />
+        <TodoList
+          todoList={todoList}
+          navigation={navigate}
+          onPress={updateTaskCompleted}
+        />
+        {/* TODO: 完了になったタスクをどう表示させるか？ */}
         {isVisible ? (
           <AddTask onPress={addTask} />
         ) : (

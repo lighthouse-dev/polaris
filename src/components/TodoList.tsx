@@ -1,23 +1,24 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List, CheckBox } from '@ui-kitten/components';
+import { TodoList as TodoListType } from '../screens/TodoListScreen';
 
 export interface TodoListProps {
-  todoList: [];
+  todoList: TodoListType;
+  onPress: (key: string, checked: boolean) => void;
 }
 
 export const TodoList = (props: TodoListProps): React.ReactElement => {
-  const todoItem = ({ item }) => {
-    // TODO: 未実装
-    const onCheckedChange = isChecked => {
-      item.completed = !!item.completed;
-    };
+  const { onPress } = props;
 
+  const todoItem = ({ item }) => {
     return (
       <CheckBox
         text={item.title.substring(0, 20)}
         checked={item.completed}
-        onChange={onCheckedChange}
+        onChange={(checked: boolean) => {
+          onPress(item.key, checked);
+        }}
         style={styles.checkbox}
       />
     );
