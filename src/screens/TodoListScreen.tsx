@@ -55,8 +55,9 @@ export const TodoListScreen = (): React.ReactElement => {
 
   const getTaskList = () => {
     // TODO: 日付でsort
-    db.collection(`groups/${currentUser.uid}:default/tasks`).onSnapshot(
-      snapshot => {
+    db.collection(`groups/${currentUser.uid}:default/tasks`)
+      .where('completed', '==', false)
+      .onSnapshot(snapshot => {
         const tempTodoList: TodoList = [];
 
         snapshot.forEach(doc => {
@@ -64,8 +65,7 @@ export const TodoListScreen = (): React.ReactElement => {
         });
 
         setTodoList(tempTodoList);
-      }
-    );
+      });
   };
 
   const addTask = (title: string) => {
@@ -118,10 +118,15 @@ export const TodoListScreen = (): React.ReactElement => {
           navigation={navigate}
           onPress={updateTaskCompleted}
         />
-        {/* TODO: 完了になったタスクをどう表示させるか？ */}
+        {/* 
+          TODO:
+            完了になったタスクをどう表示させるか？
+            「完了したタスクを隠す」 的なフラグを作る など
+        */}
         {isVisible ? (
           <AddTask onPress={addTask} />
         ) : (
+          // TODO: ボタン押した時、入力欄にカーソルが当たった状態にする
           <CircleButton name="plus" onPress={openAddTask} />
         )}
       </Layout>
