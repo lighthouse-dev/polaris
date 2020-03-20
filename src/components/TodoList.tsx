@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List, CheckBox } from '@ui-kitten/components';
 import { TodoList as TodoListType } from '../screens/TodoListScreen';
+import CheckBoxItem from '../elements/CheckBoxItem';
 
 export interface TodoListProps {
   todoList: TodoListType;
@@ -13,13 +14,12 @@ export const TodoList = (props: TodoListProps): React.ReactElement => {
 
   const todoItem = ({ item }) => {
     return (
-      <CheckBox
+      <CheckBoxItem
         text={item.title.substring(0, 20)}
         checked={item.completed}
         onChange={(checked: boolean) => {
           onPress(item.key, checked);
         }}
-        style={styles.checkbox}
       />
     );
   };
@@ -39,9 +39,6 @@ const styles = StyleSheet.create({
   },
   list: {
     backgroundColor: '#fff'
-  },
-  checkbox: {
-    margin: 8
   },
   todoDate: {
     fontSize: 12,
