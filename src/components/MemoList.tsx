@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, CardHeader, Text } from '@ui-kitten/components';
+import { Card, CardHeader, Text, List } from '@ui-kitten/components';
 import { MemoList as MemoListType } from '../screens/MemoListScreen';
 
 export interface MemoListProps {
@@ -8,19 +8,22 @@ export interface MemoListProps {
 }
 
 export const MemoList = (props: MemoListProps): React.ReactElement => {
+  const todoItem = ({ item }) => {
+    const Header = () => <CardHeader title={item.title} />;
+    return (
+      <Card style={styles.card} header={Header} key={item.index}>
+        <Text>{item.content.substring(0, 120)} ...</Text>
+        <View>
+          {/* TODO: Tag表示できるように対応 */}
+          <Text>{item.tag}</Text>
+        </View>
+      </Card>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      {props.memoList.map(memo => {
-        const Header = () => <CardHeader title={memo.title} />;
-        return (
-          <Card style={styles.card} header={Header} key={memo.key}>
-            <Text>{memo.content} ...</Text>
-            <View>
-              <Text>{memo.tag}</Text>
-            </View>
-          </Card>
-        );
-      })}
+      <List style={styles.list} data={props.memoList} renderItem={todoItem} />
     </View>
   );
 };
@@ -32,8 +35,12 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: '#FFF'
   },
+  list: {
+    backgroundColor: '#fff'
+  },
   card: {
-    marginVertical: 10
+    marginVertical: 10,
+    maxHeight: 550
   }
 });
 
