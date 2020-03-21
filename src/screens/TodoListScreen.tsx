@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-navigation-stack';
 import { Layout } from '@ui-kitten/components';
-import { useNavigation } from 'react-navigation-hooks';
 import firebase from 'firebase';
 
 import TodoList from '../components/TodoList';
@@ -38,8 +37,7 @@ const dateString = date => {
 };
 
 export const TodoListScreen = (): React.ReactElement => {
-  const { navigate } = useNavigation();
-  const [todoList, setTodoList] = React.useState<Task[] | []>([]);
+  const [todoList, setTodoList] = React.useState<TodoList | []>([]);
   const [isVisible, setIsVisible] = React.useState(false);
   const { currentUser } = firebase.auth();
   const db = firebase.firestore();
@@ -57,15 +55,20 @@ export const TodoListScreen = (): React.ReactElement => {
     // TODO: 日付でsort
     db.collection(`groups/${currentUser.uid}:default/tasks`)
       .where('completed', '==', false)
-      .onSnapshot(snapshot => {
-        const tempTodoList: TodoList = [];
+      .onSnapshot(
+        snapshot => {
+          const tempTodoList: TodoList = [];
 
-        snapshot.forEach(doc => {
-          tempTodoList.push({ key: doc.id, ...doc.data() } as Task);
-        });
+          snapshot.forEach(doc => {
+            tempTodoList.push({ key: doc.id, ...doc.data() } as Task);
+          });
 
-        setTodoList(tempTodoList);
-      });
+          setTodoList(tempTodoList);
+        },
+        err => {
+          console.error(`getTaskList:-  ${err}`);
+        }
+      );
   };
 
   const addTask = (title: string) => {
@@ -78,9 +81,9 @@ export const TodoListScreen = (): React.ReactElement => {
       priority: 1,
       person: 'julee',
       deadline: currentDate,
-      creator: 'julee',
+      creator: currentUser.uid,
       create_date: currentDate,
-      updater: 'soojin',
+      updater: currentUser.uid,
       update_date: currentDate
     };
 
@@ -113,11 +116,7 @@ export const TodoListScreen = (): React.ReactElement => {
       behavior="padding"
     >
       <Layout style={styles.container}>
-        <TodoList
-          todoList={todoList}
-          navigation={navigate}
-          onPress={updateTaskCompleted}
-        />
+        <TodoList todoList={todoList} onPress={updateTaskCompleted} />
         {/* 
           TODO:
             完了になったタスクをどう表示させるか？
@@ -127,7 +126,7 @@ export const TodoListScreen = (): React.ReactElement => {
           <AddTask onPress={addTask} />
         ) : (
           // TODO: ボタン押した時、入力欄にカーソルが当たった状態にする
-          <CircleButton name="plus" onPress={openAddTask} />
+          <CircleButton iconName="plus" onPress={openAddTask} />
         )}
       </Layout>
     </KeyboardAvoidingView>
