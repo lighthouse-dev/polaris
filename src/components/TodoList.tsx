@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { List, CheckBox } from '@ui-kitten/components';
+import { List } from '@ui-kitten/components';
 import { TodoList as TodoListType } from '../screens/TodoListScreen';
 import CheckBoxItem from '../elements/CheckBoxItem';
 
