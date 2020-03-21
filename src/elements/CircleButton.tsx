@@ -2,25 +2,27 @@ import React from 'react';
 import { StyleSheet, TouchableHighlight } from 'react-native';
 import { Button, Icon, Layout } from '@ui-kitten/components';
 
-class CircleButton extends React.Component {
-  render() {
-    const { name, onPress } = this.props;
-    const StarIcon = style => <Icon {...style} name={this.props.name} />;
-
-    return (
-      <TouchableHighlight style={styles.container} underlayColor="transparent">
-        <Layout>
-          <Button
-            style={styles.button}
-            status="danger"
-            icon={StarIcon}
-            onPress={onPress}
-          />
-        </Layout>
-      </TouchableHighlight>
-    );
-  }
+export interface CircleButtonProps {
+  iconName: string;
+  onPress: () => void;
 }
+const CircleButton = (props: CircleButtonProps) => {
+  const { iconName, onPress } = props;
+  const StarIcon = style => <Icon {...style} name={iconName} />;
+
+  return (
+    <TouchableHighlight style={styles.container} underlayColor="transparent">
+      <Layout>
+        <Button
+          style={styles.button}
+          status="danger"
+          icon={StarIcon}
+          onPress={onPress}
+        />
+      </Layout>
+    </TouchableHighlight>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
