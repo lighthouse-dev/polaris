@@ -10,6 +10,7 @@ import { mapping, light as theme } from '@eva-design/eva';
 import LoginScreen from './src/screens/LoginScreen';
 import TodoListScreen from './src/screens/TodoListScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
+import MemoAddScreen from './src/screens/MemoAddScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import ENV from './env.json';
 
@@ -62,6 +63,13 @@ const StackNavigator = createStackNavigator({
     }
   },
   SignUpScreen: { screen: SignUpScreen },
+  MemoListScreen: { screen: MemoListScreen },
+  MemoAddScreen: {
+    screen: MemoAddScreen,
+    navigationOptions: {
+      title: '新規メモ追加'
+    }
+  },
   TabScreen: {
     screen: TabScreen,
     navigationOptions: {
