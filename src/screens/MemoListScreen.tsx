@@ -1,30 +1,72 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import InputItem from '../elements/InputItem';
+import React, { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import { Layout } from '@ui-kitten/components';
+import firebase from 'firebase';
 
-class MemoListScreen extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}> MEMO LIST </Text>
-        <InputItem />
-      </View>
+import CircleButton from '../../src/elements/CircleButton';
+import { MemoList } from '../components/MemoList';
+
+export type MemoList = Memo[];
+
+export type Memo = {
+  key?: string;
+  title: string;
+  content: string;
+  tag: string;
+  creator: string;
+  create_date: Date;
+  updater: string;
+  update_date: Date;
+};
+
+export const MemoListScreen = (props): React.ReactElement => {
+  const [memoList, setMemoList] = React.useState<MemoList | []>([]);
+
+  useEffect(() => {
+    getMemoList();
+  }, []);
+
+  const getMemoList = () => {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    db.collection(`groups/${currentUser.uid}:default/memos`).onSnapshot(
+      snapshot => {
+        const tempMemoList: MemoList = [];
+
+        snapshot.forEach(doc => {
+          tempMemoList.push({ key: doc.id, ...doc.data() } as Memo);
+        });
+
+        setMemoList(tempMemoList);
+      },
+      err => {
+        console.error(`getMemoList:-  ${err}`);
+      }
     );
-  }
-}
+  };
+
+  return (
+    <Layout style={styles.container}>
+      <MemoList memoList={memoList} />
+      <CircleButton
+        iconName="edit-outline"
+        onPress={() => {
+          props.navigation.push('MemoAddScreen');
+        }}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    padding: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 24,
     backgroundColor: '#FFF'
   },
-  title: {
-    fontSize: 30,
-    alignSelf: 'center',
-    marginBottom: 24,
-    fontWeight: 'bold'
+  card: {
+    marginVertical: 10
   }
 });
 
