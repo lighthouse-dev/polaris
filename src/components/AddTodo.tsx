@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Layout, Input, Icon } from '@ui-kitten/components';
 
-export interface AddTaskProps {
+export interface AddTodoProps {
   onPress: (title: string) => void;
 }
 
-export const AddTask = (props: AddTaskProps): React.ReactElement => {
+export const AddTodo = (props: AddTodoProps): React.ReactElement => {
   const StarIcon = style => <Icon {...style} name="plus" />;
   const [title, settitle] = React.useState<string>();
   const { onPress } = props;
@@ -17,13 +17,13 @@ export const AddTask = (props: AddTaskProps): React.ReactElement => {
       <Layout level="3" style={styles.modal}>
         {/* TODO: 期限日を指定できるようにする（カレンダー） */}
         <Input
-          style={styles.taskInput}
+          style={styles.todoInput}
           placeholder="タスクを入力してください"
           value={title}
           onChangeText={settitle}
         />
         <Button
-          style={styles.addTaskButton}
+          style={styles.addTodoButton}
           status="primary"
           icon={StarIcon}
           onPress={() => {
@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10
   },
-  taskInput: {
+  todoInput: {
     marginLeft: '4%',
     width: '80%'
   },
-  addTaskButton: {
+  addTodoButton: {
     marginLeft: '2%',
     marginRight: '4%',
     width: '10%',
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddTask;
+export default AddTodo;
