@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, CardHeader, Text, List } from '@ui-kitten/components';
+import { List } from '@ui-kitten/components';
 import { MemoList as MemoListType } from '../screens/MemoListScreen';
+import CardItem from '../elements/CardItem';
 
 export interface MemoListProps {
   memoList: MemoListType;
@@ -9,16 +10,7 @@ export interface MemoListProps {
 
 export const MemoList = (props: MemoListProps): React.ReactElement => {
   const todoItem = ({ item }) => {
-    const Header = () => <CardHeader title={item.title} />;
-    return (
-      <Card style={styles.card} header={Header} key={item.index}>
-        <Text>{item.content.substring(0, 120)} ...</Text>
-        <View>
-          {/* TODO: Tag表示できるように対応 */}
-          <Text>{item.tag}</Text>
-        </View>
-      </Card>
-    );
+    return <CardItem memo={item} style={styles.card} />;
   };
 
   return (

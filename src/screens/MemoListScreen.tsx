@@ -10,6 +10,7 @@ export type MemoList = Memo[];
 
 export type Memo = {
   key?: string;
+  index?: number;
   title: string;
   content: string;
   tag: string;
