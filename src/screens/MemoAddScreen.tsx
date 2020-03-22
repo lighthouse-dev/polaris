@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import firebase from 'firebase';
 import CircleButton from '../elements/CircleButton';
+import TextInputItem from '../elements/TextInputItem';
 import { Memo } from './MemoListScreen';
 
 export const MemoAddScreen = (props): React.ReactElement => {
@@ -16,22 +17,19 @@ export const MemoAddScreen = (props): React.ReactElement => {
       behavior="height"
       keyboardVerticalOffset={80}
     >
-      <TextInput
+      <TextInputItem
         style={styles.memoTitleInput}
         value={title}
-        onChangeText={text => {
-          setTitle(text);
-        }}
+        onChangeText={text => setTitle(text)}
+        textAlignVertical="center"
         placeholder="タイトル"
       />
-      <TextInput
+      <TextInputItem
         style={styles.memoEditInput}
         value={body}
-        multiline
-        onChangeText={text => {
-          setBody(text);
-        }}
+        onChangeText={text => setBody(text)}
         textAlignVertical="top"
+        multiline={true}
         placeholder="メモを入力してください"
       />
       {/* TODO: ボタンの色を修正 */}

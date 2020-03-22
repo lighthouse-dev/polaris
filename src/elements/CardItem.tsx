@@ -3,12 +3,12 @@ import { StyleProp, ViewStyle, View } from 'react-native';
 import { CardHeader, Card, Text } from '@ui-kitten/components';
 import { Memo } from '../screens/MemoListScreen';
 
-export interface CardItemItemProps {
+export interface Props {
   memo: Memo;
   style: StyleProp<ViewStyle>;
 }
 
-const CardItem = (props: CardItemItemProps) => {
+const CardItem = (props: Props) => {
   const { memo, style } = props;
 
   const Header = () => <CardHeader title={memo.title} />;
