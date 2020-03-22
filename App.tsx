@@ -28,6 +28,10 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+// TODO: Redux化
+// https://qiita.com/gonta616/items/278a7e81a8b624d9621e
+// https://github.com/vkammerer/react-redux-firebase
+// https://github.com/r-park/todo-react-redux
 const TabScreen = createMaterialTopTabNavigator(
   {
     TODO: { screen: TodoListScreen },
