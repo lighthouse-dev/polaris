@@ -117,11 +117,8 @@ export const TodoListScreen = (): React.ReactElement => {
     >
       <Layout style={styles.container}>
         <TodoList todoList={todoList} onPress={updateTaskCompleted} />
-        {/* 
-          TODO:
-            完了になったタスクをどう表示させるか？
-            「完了したタスクを隠す」 的なフラグを作る など
-        */}
+        {/* TODO: 完了になったタスクをどう表示させるか？ */}
+        {/* TODO: 「完了したタスクを隠す」 的なフラグを作る など */}
         {isVisible ? (
           <AddTask onPress={addTask} />
         ) : (

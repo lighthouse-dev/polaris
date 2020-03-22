@@ -15,6 +15,7 @@ export const MemoAddScreen = (props): React.ReactElement => {
       behavior="height"
       keyboardVerticalOffset={80}
     >
+      {/* TODO: タイトル入力欄追加 */}
       <TextInput
         style={styles.memoEditInput}
         value={body}
