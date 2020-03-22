@@ -9,7 +9,6 @@ import { Memo } from './MemoListScreen';
 export const MemoAddScreen = (props): React.ReactElement => {
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
-  const db = firebase.firestore();
   const { currentUser } = firebase.auth();
 
   return (
@@ -52,7 +51,9 @@ export const MemoAddScreen = (props): React.ReactElement => {
             update_date: currentDate
           };
 
-          db.collection(`groups/${currentUser.uid}:default/memos`)
+          firebase
+            .firestore()
+            .collection(`groups/${currentUser.uid}:default/memos`)
             .doc()
             .set(memo)
             .then(() => {

@@ -25,10 +25,10 @@ export type Todo = {
 };
 
 export const TodoListScreen = (): React.ReactElement => {
+  const db = firebase.firestore();
+  const { currentUser } = firebase.auth();
   const [todoList, setTodoList] = React.useState<TodoList | []>([]);
   const [isVisible, setIsVisible] = React.useState(false);
-  const { currentUser } = firebase.auth();
-  const db = firebase.firestore();
 
   // MemoListScreenコンポーネントのマウント時に実行
   useEffect(() => {

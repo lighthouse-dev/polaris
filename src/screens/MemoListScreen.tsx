@@ -29,21 +29,23 @@ export const MemoListScreen = (props): React.ReactElement => {
 
   const getMemoList = () => {
     const { currentUser } = firebase.auth();
-    const db = firebase.firestore();
-    db.collection(`groups/${currentUser.uid}:default/memos`).onSnapshot(
-      snapshot => {
-        const tempMemoList: MemoList = [];
+    firebase
+      .firestore()
+      .collection(`groups/${currentUser.uid}:default/memos`)
+      .onSnapshot(
+        snapshot => {
+          const tempMemoList: MemoList = [];
 
-        snapshot.forEach(doc => {
-          tempMemoList.push({ key: doc.id, ...doc.data() } as Memo);
-        });
+          snapshot.forEach(doc => {
+            tempMemoList.push({ key: doc.id, ...doc.data() } as Memo);
+          });
 
-        setMemoList(tempMemoList);
-      },
-      err => {
-        console.error(`getMemoList:-  ${err}`);
-      }
-    );
+          setMemoList(tempMemoList);
+        },
+        err => {
+          console.error(`getMemoList:-  ${err}`);
+        }
+      );
   };
 
   return (

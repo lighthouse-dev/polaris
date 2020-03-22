@@ -14,8 +14,6 @@ export type returnMemo = {
 };
 
 export const MemoEditScreen = (props): React.ReactElement => {
-  const db = firebase.firestore();
-  const { currentUser } = firebase.auth();
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
   const [key, setKey] = React.useState<string>('');
@@ -31,7 +29,10 @@ export const MemoEditScreen = (props): React.ReactElement => {
     // TODO
     // 1. tag機能実装
     // 2. 他の項目もちゃんと入るようにする
-    db.collection(`groups/${currentUser.uid}:default/memos`)
+    const { currentUser } = firebase.auth();
+    firebase
+      .firestore()
+      .collection(`groups/${currentUser.uid}:default/memos`)
       .doc(key)
       .update({
         content: body,
