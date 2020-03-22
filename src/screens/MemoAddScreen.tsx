@@ -5,6 +5,7 @@ import CircleButton from '../elements/CircleButton';
 import { Memo } from './MemoListScreen';
 
 export const MemoAddScreen = (props): React.ReactElement => {
+  const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
   const db = firebase.firestore();
   const { currentUser } = firebase.auth();
@@ -15,7 +16,14 @@ export const MemoAddScreen = (props): React.ReactElement => {
       behavior="height"
       keyboardVerticalOffset={80}
     >
-      {/* TODO: タイトル入力欄追加 */}
+      <TextInput
+        style={styles.memoTitleInput}
+        value={title}
+        onChangeText={text => {
+          setTitle(text);
+        }}
+        placeholder="タイトル"
+      />
       <TextInput
         style={styles.memoEditInput}
         value={body}
@@ -24,6 +32,7 @@ export const MemoAddScreen = (props): React.ReactElement => {
           setBody(text);
         }}
         textAlignVertical="top"
+        placeholder="メモを入力してください"
       />
       {/* TODO: ボタンの色を修正 */}
       <CircleButton
@@ -35,7 +44,7 @@ export const MemoAddScreen = (props): React.ReactElement => {
           // 1. tag機能実装
           // 2. 他の項目もちゃんと入るようにする
           const memo: Memo = {
-            title: body.substring(0, 10),
+            title: title,
             content: body,
             tag: '',
             creator: currentUser.uid,
@@ -64,13 +73,18 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%'
   },
+  memoTitleInput: {
+    backgroundColor: '#FFF',
+    paddingTop: 20,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 20,
+    fontSize: 22
+  },
   memoEditInput: {
     backgroundColor: '#FFF',
     flex: 1,
-    paddingTop: 32,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 16,
+    padding: 16,
     fontSize: 16
   }
 });
