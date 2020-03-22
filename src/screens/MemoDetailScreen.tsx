@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 import CircleButton from '../elements/CircleButton';
 
@@ -28,18 +28,16 @@ export const MemoDetailScreen = (props): React.ReactElement => {
 
   return (
     <Layout style={styles.container}>
-      <View>
-        <View style={styles.memoHeader}>
-          <View>
-            <Text category="h2">{title ? title.substring(0, 10) : ''}</Text>
-            <Text category="c2">{dateString(createDate)}</Text>
-          </View>
-        </View>
-      </View>
+      <ScrollView>
+        <Layout style={styles.memoHeader}>
+          <Text category="h2">{title ? title.substring(0, 10) : ''}</Text>
+          <Text category="c2">{dateString(createDate)}</Text>
+        </Layout>
 
-      <View style={styles.memoContent}>
-        <Text style={styles.memoBody}> {body} </Text>
-      </View>
+        <Layout style={styles.memoContent}>
+          <Text style={styles.memoBody}>{body}</Text>
+        </Layout>
+      </ScrollView>
       <CircleButton
         iconName="edit-outline"
         onPress={() => {
@@ -59,7 +57,6 @@ const styles = StyleSheet.create({
   },
   memoHeader: {
     height: 100,
-    backgroundColor: '#FFF',
     justifyContent: 'center',
     padding: 16,
     fontSize: 22,
@@ -69,11 +66,10 @@ const styles = StyleSheet.create({
   memoContent: {
     flex: 1,
     paddingTop: 30,
-    paddingBottom: 16,
+    paddingBottom: 80,
     paddingLeft: 16,
     paddingRight: 16,
-    fontSize: 16,
-    backgroundColor: '#FFF'
+    fontSize: 16
   },
   memoBody: {
     fontSize: 15,
