@@ -6,17 +6,57 @@ import firebase from 'firebase';
 import CircleButton from '../elements/CircleButton';
 import TextInputItem from '../elements/TextInputItem';
 
+export type returnMemo = {
+  key: string;
+  title: string;
+  content: string;
+  createDate: firebase.firestore.Timestamp;
+};
+
 export const MemoEditScreen = (props): React.ReactElement => {
+  const db = firebase.firestore();
+  const { currentUser } = firebase.auth();
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
+  const [key, setKey] = React.useState<string>('');
 
   useEffect(() => {
     const { params } = props.navigation.state;
+    setKey(params.memo.key);
     setTitle(params.memo.title);
     setBody(params.memo.content);
   }, []);
 
+  const editMemo = () => {
+    // TODO
+    // 1. tag機能実装
+    // 2. 他の項目もちゃんと入るようにする
+    db.collection(`groups/${currentUser.uid}:default/memos`)
+      .doc(key)
+      .update({
+        content: body,
+        title: title,
+        updater: currentUser.uid,
+        update_date: new Date()
+      })
+      .then(() => {
+        const returnMemo: returnMemo = {
+          key: key,
+          title: title,
+          content: body,
+          createDate: firebase.firestore.Timestamp.now()
+          // returnMemo に渡すので new Date() ではなくて firestore の Timestamp 型を直接使う
+        };
+        props.navigation.state.params.returnMemo(returnMemo);
+        props.navigation.goBack();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   return (
+    // TODO: ScrollViewに修正
     <Layout style={styles.container}>
       <TextInputItem
         style={styles.memoTitleInput}
@@ -33,12 +73,7 @@ export const MemoEditScreen = (props): React.ReactElement => {
         multiline={true}
         placeholder="メモを入力してください"
       />
-      <CircleButton
-        iconName="edit-outline"
-        onPress={() => {
-          // TODO: Edit処理作成
-        }}
-      />
+      <CircleButton iconName="checkmark-outline" onPress={editMemo} />
     </Layout>
   );
 };

@@ -3,10 +3,23 @@ import { StyleSheet, ScrollView } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 import CircleButton from '../elements/CircleButton';
 
+import { Memo } from './MemoListScreen';
+import { returnMemo } from './MemoEditScreen';
+
 export const MemoDetailScreen = (props): React.ReactElement => {
+  const [memo, setMemo] = React.useState<Memo>();
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
-  const [createDate, setCreateDate] = React.useState<string>(null);
+  const [createDate, setCreateDate] = React.useState<
+    firebase.firestore.Timestamp
+  >(null);
+
+  useEffect(() => {
+    const { params } = props.navigation.state;
+    setTitle(params.memo.title);
+    setBody(params.memo.content);
+    setCreateDate(params.memo.create_date);
+  }, []);
 
   const dateString = date => {
     if (date == null) {
@@ -19,12 +32,11 @@ export const MemoDetailScreen = (props): React.ReactElement => {
       .split('T')[0];
   };
 
-  useEffect(() => {
-    const { params } = props.navigation.state;
-    setTitle(params.memo.title);
-    setBody(params.memo.content);
-    setCreateDate(params.memo.create_date);
-  }, []);
+  const returnMemo = (memo: returnMemo) => {
+    setTitle(memo.title);
+    setBody(memo.content);
+    setCreateDate(memo.createDate);
+  };
 
   return (
     <Layout style={styles.container}>
@@ -41,8 +53,9 @@ export const MemoDetailScreen = (props): React.ReactElement => {
       <CircleButton
         iconName="edit-outline"
         onPress={() => {
-          props.navigation.push('MemoEditScreen', {
-            memo: props.navigation.state.params.memo
+          props.navigation.navigate('MemoEditScreen', {
+            memo: props.navigation.state.params.memo,
+            returnMemo: returnMemo.bind(memo)
           });
         }}
       />
