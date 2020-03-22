@@ -4,13 +4,22 @@ import { List } from '@ui-kitten/components';
 import { MemoList as MemoListType } from '../screens/MemoListScreen';
 import CardItem from '../elements/CardItem';
 
-export interface MemoListProps {
+export interface Props {
   memoList: MemoListType;
+  navigation: any;
 }
 
-export const MemoList = (props: MemoListProps): React.ReactElement => {
+export const MemoList = (props: Props): React.ReactElement => {
   const todoItem = ({ item }) => {
-    return <CardItem memo={item} style={styles.card} />;
+    return (
+      <CardItem
+        memo={item}
+        style={styles.card}
+        onPress={() => {
+          props.navigation.push('MemoDetailScreen', { memo: item });
+        }}
+      />
+    );
   };
 
   return (

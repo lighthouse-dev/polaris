@@ -49,7 +49,7 @@ export const MemoListScreen = (props): React.ReactElement => {
   return (
     <Layout style={styles.container}>
       {/* TODO: 検索欄実装 */}
-      <MemoList memoList={memoList} />
+      <MemoList memoList={memoList} navigation={props.navigation} />
       <CircleButton
         iconName="edit-outline"
         onPress={() => {

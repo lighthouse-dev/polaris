@@ -11,6 +11,8 @@ import LoginScreen from './src/screens/LoginScreen';
 import TodoListScreen from './src/screens/TodoListScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoAddScreen from './src/screens/MemoAddScreen';
+import MemoEditScreen from './src/screens/MemoEditScreen';
+import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import ENV from './env.json';
 
@@ -72,6 +74,18 @@ const StackNavigator = createStackNavigator({
     screen: MemoAddScreen,
     navigationOptions: {
       title: '新規メモ追加'
+    }
+  },
+  MemoEditScreen: {
+    screen: MemoEditScreen,
+    navigationOptions: {
+      title: ''
+    }
+  },
+  MemoDetailScreen: {
+    screen: MemoDetailScreen,
+    navigationOptions: {
+      title: ''
     }
   },
   TabScreen: {
