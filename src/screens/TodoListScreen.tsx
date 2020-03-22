@@ -24,18 +24,6 @@ export type Todo = {
   update_date: Date; //'2019-12-01',
 };
 
-// TODO: 必要なければ消す
-const dateString = date => {
-  if (date == null) {
-    return '';
-  }
-
-  return date
-    .toDate()
-    .toISOString()
-    .split('T')[0];
-};
-
 export const TodoListScreen = (): React.ReactElement => {
   const [todoList, setTodoList] = React.useState<TodoList | []>([]);
   const [isVisible, setIsVisible] = React.useState(false);
