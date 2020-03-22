@@ -73,16 +73,18 @@ const styles = StyleSheet.create({
   },
   memoTitleInput: {
     backgroundColor: '#FFF',
-    paddingTop: 20,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 20,
-    fontSize: 22
+    padding: 16,
+    fontSize: 22,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEE'
   },
   memoEditInput: {
     backgroundColor: '#FFF',
     flex: 1,
-    padding: 16,
+    paddingTop: 30,
+    paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
     fontSize: 16
   }
 });
