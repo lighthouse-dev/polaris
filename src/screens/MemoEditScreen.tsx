@@ -39,7 +39,6 @@ export const MemoEditScreen = (props): React.ReactElement => {
           // TODO: Edit処理作成
         }}
       />
-      }
     </Layout>
   );
 };
