@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Layout } from '@ui-kitten/components';
+import { Header } from 'react-navigation-stack';
 import firebase from 'firebase';
 
 import CircleButton from '../elements/CircleButton';
@@ -57,25 +58,30 @@ export const MemoEditScreen = (props): React.ReactElement => {
   };
 
   return (
-    // TODO: ScrollViewに修正
-    <Layout style={styles.container}>
-      <TextInputItem
-        style={styles.memoTitleInput}
-        value={title}
-        onChangeText={text => setTitle(text)}
-        textAlignVertical="center"
-        placeholder="タイトル"
-      />
-      <TextInputItem
-        style={styles.memoEditInput}
-        value={body}
-        onChangeText={text => setBody(text)}
-        textAlignVertical="top"
-        multiline={true}
-        placeholder="メモを入力してください"
-      />
-      <CircleButton iconName="checkmark-outline" onPress={editMemo} />
-    </Layout>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={Header.HEIGHT + 60}
+      style={{ flex: 1 }}
+      behavior="padding"
+    >
+      <Layout style={styles.container}>
+        <TextInputItem
+          style={styles.memoTitleInput}
+          value={title}
+          onChangeText={text => setTitle(text)}
+          textAlignVertical="center"
+          placeholder="タイトル"
+        />
+        <TextInputItem
+          style={styles.memoEditInput}
+          value={body}
+          onChangeText={text => setBody(text)}
+          textAlignVertical="top"
+          multiline={true}
+          placeholder="メモを入力してください"
+        />
+        <CircleButton iconName="checkmark-outline" onPress={editMemo} />
+      </Layout>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     flex: 1,
     paddingTop: 30,
-    paddingBottom: 16,
+    paddingBottom: 80,
     paddingLeft: 16,
     paddingRight: 16,
     fontSize: 16
