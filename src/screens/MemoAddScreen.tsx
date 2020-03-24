@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import firebase from 'firebase';
 
 import CircleButton from '../elements/CircleButton';
