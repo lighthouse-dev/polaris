@@ -33,6 +33,8 @@ export const MemoDetailScreen = (props): React.ReactElement => {
   };
 
   const returnMemo = (memo: returnMemo) => {
+    // TODO: 詳細 → 編集 → 詳細 → 編集にくるとデータ一致しない問題発生
+    // Memoの形にしてsetMemoする必要がありそう
     setTitle(memo.title);
     setBody(memo.content);
     setCreateDate(memo.createDate);
