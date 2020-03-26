@@ -5,11 +5,12 @@ import { Button, Layout, Icon } from '@ui-kitten/components';
 import OverflowMenuItem from '../elements/OverflowMenuItem';
 
 export interface Props {
-  onPress: () => void;
+  editMemo: () => void;
+  deleteMemo: () => void;
 }
 
 export const MemoBottomBar = (props): React.ReactElement => {
-  const { onPress } = props;
+  const { editMemo, deleteMemo } = props;
 
   const editIcon = style => (
     <Icon {...style} width={35} height={30} name="edit-outline" />
@@ -22,10 +23,10 @@ export const MemoBottomBar = (props): React.ReactElement => {
           style={styles.editButton}
           icon={editIcon}
           appearance="ghost"
-          onPress={onPress}
+          onPress={editMemo}
         />
       </Layout>
-      <OverflowMenuItem iconSize={28} />
+      <OverflowMenuItem iconSize={28} deleteMemo={deleteMemo} />
     </Layout>
   );
 };

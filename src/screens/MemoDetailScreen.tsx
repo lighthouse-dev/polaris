@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
+import firebase from 'firebase';
 
 import { Memo } from './MemoListScreen';
 import { returnMemo } from './MemoEditScreen';
@@ -19,6 +20,7 @@ export const MemoDetailScreen = (props): React.ReactElement => {
     setTitle(params.memo.title);
     setBody(params.memo.content);
     setCreateDate(params.memo.create_date);
+    setMemo(params.memo);
   }, []);
 
   const dateString = date => {
@@ -40,6 +42,28 @@ export const MemoDetailScreen = (props): React.ReactElement => {
     setCreateDate(memo.createDate);
   };
 
+  const editMemo = () => {
+    props.navigation.navigate('MemoEditScreen', {
+      memo: props.navigation.state.params.memo,
+      returnMemo: returnMemo.bind(memo)
+    });
+  };
+
+  const deleteMemo = () => {
+    const { currentUser } = firebase.auth();
+    firebase
+      .firestore()
+      .collection(`groups/${currentUser.uid}:default/memos`)
+      .doc(memo.key)
+      .delete()
+      .then(() => {
+        props.navigation.goBack();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   return (
     <Layout style={styles.container}>
       <ScrollView>
@@ -52,14 +76,7 @@ export const MemoDetailScreen = (props): React.ReactElement => {
           <Text style={styles.memoBody}>{body}</Text>
         </Layout>
       </ScrollView>
-      <MemoBottomBar
-        onPress={() => {
-          props.navigation.navigate('MemoEditScreen', {
-            memo: props.navigation.state.params.memo,
-            returnMemo: returnMemo.bind(memo)
-          });
-        }}
-      />
+      <MemoBottomBar editMemo={editMemo} deleteMemo={deleteMemo} />
     </Layout>
   );
 };

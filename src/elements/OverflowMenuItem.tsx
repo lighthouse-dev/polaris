@@ -4,11 +4,11 @@ import { Button, Layout, OverflowMenu, Icon } from '@ui-kitten/components';
 
 export interface Props {
   iconSize: number;
-  onPress?: () => void;
+  deleteMemo: () => void;
 }
 
 const OverflowMenuItem = (props: Props) => {
-  const { iconSize } = props;
+  const { iconSize, deleteMemo } = props;
   const [menuVisible, setMenuVisible] = React.useState(false);
 
   const menuIcon = style => (
@@ -24,7 +24,8 @@ const OverflowMenuItem = (props: Props) => {
 
   const onItemSelect = index => {
     setMenuVisible(false);
-    // TODO: 削除機能実装
+
+    if (index === 0) deleteMemo();
   };
 
   const toggleMenu = () => {
