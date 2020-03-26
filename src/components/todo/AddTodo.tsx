@@ -45,9 +45,7 @@ const styles = StyleSheet.create({
   modal: {
     flexDirection: 'row',
     paddingVertical: 24,
-    paddingHorizontal: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    paddingHorizontal: 10
   },
   todoInput: {
     marginLeft: '4%',
