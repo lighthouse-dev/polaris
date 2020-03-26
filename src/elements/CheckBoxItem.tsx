@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { CheckBox } from '@ui-kitten/components';
 
 export interface CheckBoxProps {
-  text: string;
+  text?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
 }

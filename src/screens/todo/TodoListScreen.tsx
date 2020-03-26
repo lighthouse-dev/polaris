@@ -24,7 +24,7 @@ export type Todo = {
   update_date: Date; //'2019-12-01',
 };
 
-export const TodoListScreen = (): React.ReactElement => {
+export const TodoListScreen = (props): React.ReactElement => {
   const db = firebase.firestore();
   const { currentUser } = firebase.auth();
   const [todoList, setTodoList] = React.useState<TodoList | []>([]);
@@ -104,7 +104,11 @@ export const TodoListScreen = (): React.ReactElement => {
       behavior="padding"
     >
       <Layout style={styles.container}>
-        <TodoList todoList={todoList} onPress={updateTodoCompleted} />
+        <TodoList
+          todoList={todoList}
+          navigation={props.navigation}
+          onPress={updateTodoCompleted}
+        />
         {/* TODO: 完了になったタスクをどう表示させるか？ */}
         {/* TODO: 「完了したタスクを隠す」 的なフラグを作る など */}
         {isVisible ? (

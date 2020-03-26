@@ -9,6 +9,7 @@ import { mapping, light as theme } from '@eva-design/eva';
 
 import LoginScreen from './src/screens/login/LoginScreen';
 import TodoListScreen from './src/screens/todo/TodoListScreen';
+import TodoDetailScreen from './src/screens/todo/TodoDetailScreen';
 import MemoListScreen from './src/screens/memo/MemoListScreen';
 import MemoAddScreen from './src/screens/memo/MemoAddScreen';
 import MemoEditScreen from './src/screens/memo/MemoEditScreen';
@@ -69,6 +70,7 @@ const StackNavigator = createStackNavigator({
     }
   },
   SignUpScreen: { screen: SignUpScreen },
+  TodoDetailScreen: { screen: TodoDetailScreen },
   MemoListScreen: { screen: MemoListScreen },
   MemoAddScreen: {
     screen: MemoAddScreen,
