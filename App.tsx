@@ -99,6 +99,8 @@ const StackNavigator = createStackNavigator({
         shadowRadius: 2
       },
       headerTitleStyle: {
+        flexGrow: 1,
+        textAlign: 'center',
         color: '#FFF',
         fontSize: 16,
         fontWeight: 'bold'
@@ -106,6 +108,8 @@ const StackNavigator = createStackNavigator({
       headerTintColor: '#FFFFFF',
       title: 'POLARIS',
       headerBackTitle: null
+      // TODO: システム設定アイコン配置
+      // headerRight: <OverflowMenuItem />
     }
   }
 });
