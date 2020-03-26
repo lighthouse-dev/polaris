@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
-import CircleButton from '../elements/CircleButton';
 
 import { Memo } from './MemoListScreen';
 import { returnMemo } from './MemoEditScreen';
+import { MemoBottomBar } from '../components/MemoBottomBar';
 
 export const MemoDetailScreen = (props): React.ReactElement => {
   const [memo, setMemo] = React.useState<Memo>();
@@ -52,8 +52,7 @@ export const MemoDetailScreen = (props): React.ReactElement => {
           <Text style={styles.memoBody}>{body}</Text>
         </Layout>
       </ScrollView>
-      <CircleButton
-        iconName="edit-outline"
+      <MemoBottomBar
         onPress={() => {
           props.navigation.navigate('MemoEditScreen', {
             memo: props.navigation.state.params.memo,
