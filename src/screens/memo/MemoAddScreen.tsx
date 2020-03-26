@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import firebase from 'firebase';
 
-import CircleButton from '../elements/CircleButton';
-import TextInputItem from '../elements/TextInputItem';
+import CircleButton from '../../elements/CircleButton';
+import TextInputItem from '../../elements/TextInputItem';
 import { Memo } from './MemoListScreen';
 
 export const MemoAddScreen = (props): React.ReactElement => {

@@ -4,9 +4,9 @@ import { Header } from 'react-navigation-stack';
 import { Layout } from '@ui-kitten/components';
 import firebase from 'firebase';
 
-import TodoList from '../components/TodoList';
-import CircleButton from '../../src/elements/CircleButton';
-import AddTodo from '../components/AddTodo';
+import TodoList from '../../components/todo/TodoList';
+import CircleButton from '../../elements/CircleButton';
+import AddTodo from '../../components/todo/AddTodo';
 
 export type TodoList = Todo[];
 

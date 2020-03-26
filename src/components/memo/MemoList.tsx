@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List } from '@ui-kitten/components';
-import { MemoList as MemoListType } from '../screens/MemoListScreen';
-import CardItem from '../elements/CardItem';
+import { MemoList as MemoListType } from '../../screens/memo/MemoListScreen';
+import CardItem from '../../elements/CardItem';
 
 export interface Props {
   memoList: MemoListType;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, ViewStyle, View, TouchableHighlight } from 'react-native';
 import { CardHeader, Card, Text } from '@ui-kitten/components';
-import { Memo } from '../screens/MemoListScreen';
+import { Memo } from '../screens/memo/MemoListScreen';
 
 export interface Props {
   memo: Memo;

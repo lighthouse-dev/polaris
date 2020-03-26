@@ -4,8 +4,8 @@ import { Layout } from '@ui-kitten/components';
 import { Header } from 'react-navigation-stack';
 import firebase from 'firebase';
 
-import CircleButton from '../elements/CircleButton';
-import TextInputItem from '../elements/TextInputItem';
+import CircleButton from '../../elements/CircleButton';
+import TextInputItem from '../../elements/TextInputItem';
 
 export type returnMemo = {
   key: string;

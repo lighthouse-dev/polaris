@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, Icon } from '@ui-kitten/components';
 
-import OverflowMenuItem from '../elements/OverflowMenuItem';
+import OverflowMenuItem from '../../elements/OverflowMenuItem';
 
 export interface Props {
   editMemo: () => void;

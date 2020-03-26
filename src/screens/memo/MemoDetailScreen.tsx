@@ -5,7 +5,7 @@ import firebase from 'firebase';
 
 import { Memo } from './MemoListScreen';
 import { returnMemo } from './MemoEditScreen';
-import { MemoBottomBar } from '../components/MemoBottomBar';
+import { MemoBottomBar } from '../../components/memo/MemoBottomBar';
 
 export const MemoDetailScreen = (props): React.ReactElement => {
   const [memo, setMemo] = React.useState<Memo>();

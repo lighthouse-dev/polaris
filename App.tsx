@@ -7,13 +7,13 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { mapping, light as theme } from '@eva-design/eva';
 
-import LoginScreen from './src/screens/LoginScreen';
-import TodoListScreen from './src/screens/TodoListScreen';
-import MemoListScreen from './src/screens/MemoListScreen';
-import MemoAddScreen from './src/screens/MemoAddScreen';
-import MemoEditScreen from './src/screens/MemoEditScreen';
-import MemoDetailScreen from './src/screens/MemoDetailScreen';
-import SignUpScreen from './src/screens/SignUpScreen';
+import LoginScreen from './src/screens/login/LoginScreen';
+import TodoListScreen from './src/screens/todo/TodoListScreen';
+import MemoListScreen from './src/screens/memo/MemoListScreen';
+import MemoAddScreen from './src/screens/memo/MemoAddScreen';
+import MemoEditScreen from './src/screens/memo/MemoEditScreen';
+import MemoDetailScreen from './src/screens/memo/MemoDetailScreen';
+import SignUpScreen from './src/screens/login/SignUpScreen';
 import ENV from './env.json';
 
 require('firebase/firestore');

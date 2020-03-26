@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List } from '@ui-kitten/components';
-import { TodoList as TodoListType } from '../screens/TodoListScreen';
-import CheckBoxItem from '../elements/CheckBoxItem';
+import { TodoList as TodoListType } from '../../screens/todo/TodoListScreen';
+import CheckBoxItem from '../../elements/CheckBoxItem';
 
 export interface TodoListProps {
   todoList: TodoListType;
