@@ -1,5 +1,4 @@
 import React from 'react';
-import firebase from 'firebase';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
@@ -15,21 +14,6 @@ import MemoAddScreen from './src/screens/memo/MemoAddScreen';
 import MemoEditScreen from './src/screens/memo/MemoEditScreen';
 import MemoDetailScreen from './src/screens/memo/MemoDetailScreen';
 import SignUpScreen from './src/screens/login/SignUpScreen';
-import ENV from './env.json';
-
-require('firebase/firestore');
-
-const firebaseConfig = {
-  apiKey: ENV.FIREBASE_API_KEY,
-  authDomain: ENV.FIREBASE_AUTH_DOMAIN,
-  databaseURL: ENV.FIREBASE_DB_URL,
-  projectId: ENV.FIREBASE_PROJECT_ID,
-  storageBucket: ENV.FIREBASE_STORAGE,
-  messagingSenderId: ENV.FIREBASE_MESSAGING_SENDER_ID,
-  appId: ENV.FIREBASE_APPID,
-  measurementId: ENV.FIREBASE_MEASUREMENT_ID
-};
-firebase.initializeApp(firebaseConfig);
 
 // TODO: Redux化
 // https://qiita.com/gonta616/items/278a7e81a8b624d9621e

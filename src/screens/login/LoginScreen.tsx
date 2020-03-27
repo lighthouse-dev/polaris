@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
-import firebase from 'firebase';
+import firebase from '../../utils/firebase';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Loading from '../../elements/Loading';
 

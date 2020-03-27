@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
-import firebase from 'firebase';
+import firebase from '../../utils/firebase';
 
 import CircleButton from '../../elements/CircleButton';
 import { MemoList } from '../../components/memo/MemoList';

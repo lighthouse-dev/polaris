@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
-import firebase from 'firebase';
+import firebase from '../../utils/firebase';
 
 import { Memo } from './MemoListScreen';
 import { returnMemo } from './MemoEditScreen';

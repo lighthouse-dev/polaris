@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import ValidationText from '../../elements/ValidationText';
-import firebase from 'firebase';
+import firebase from '../../utils/firebase';
 
 class SignUpScreen extends React.Component {
   state = {

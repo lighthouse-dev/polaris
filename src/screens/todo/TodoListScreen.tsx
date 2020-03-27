@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-navigation-stack';
 import { Layout } from '@ui-kitten/components';
-import firebase from 'firebase';
+import firebase from '../../utils/firebase';
 
 import TodoList from '../../components/todo/TodoList';
 import CircleButton from '../../elements/CircleButton';

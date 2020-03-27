@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import { Header } from 'react-navigation-stack';
-import firebase from 'firebase';
+import firebase from '../../utils/firebase';
 
 import CircleButton from '../../elements/CircleButton';
 import TextInputItem from '../../elements/TextInputItem';
@@ -18,12 +18,16 @@ export const MemoEditScreen = (props): React.ReactElement => {
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
   const [key, setKey] = React.useState<string>('');
+  const [createDate, setCreateDate] = React.useState<
+    firebase.firestore.Timestamp
+  >(null);
 
   useEffect(() => {
     const { params } = props.navigation.state;
     setKey(params.memo.key);
     setTitle(params.memo.title);
     setBody(params.memo.content);
+    setCreateDate(params.memo.update_date);
   }, []);
 
   const editMemo = () => {
@@ -46,8 +50,7 @@ export const MemoEditScreen = (props): React.ReactElement => {
           key: key,
           title: title,
           content: body,
-          createDate: firebase.firestore.Timestamp.now()
-          // returnMemo に渡すので new Date() ではなくて firestore の Timestamp 型を直接使う
+          createDate: createDate
         };
         props.navigation.state.params.returnMemo(returnMemo);
         props.navigation.goBack();
