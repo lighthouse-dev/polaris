@@ -6,6 +6,7 @@ import firebase from '../../utils/firebase';
 import { Memo } from './MemoListScreen';
 import { returnMemo } from './MemoEditScreen';
 import { MemoBottomBar } from '../../components/memo/MemoBottomBar';
+import dateString from '../../utils/getDateString';
 
 export const MemoDetailScreen = (props): React.ReactElement => {
   const [memo, setMemo] = React.useState<Memo>();
@@ -22,17 +23,6 @@ export const MemoDetailScreen = (props): React.ReactElement => {
     setCreateDate(params.memo.create_date);
     setMemo(params.memo);
   }, []);
-
-  const dateString = date => {
-    if (date == null) {
-      return '';
-    }
-
-    return date
-      .toDate()
-      .toISOString()
-      .split('T')[0];
-  };
 
   const returnMemo = (memo: returnMemo) => {
     // TODO: 詳細 → 編集 → 詳細 → 編集にくるとデータ一致しない問題発生
@@ -66,12 +56,11 @@ export const MemoDetailScreen = (props): React.ReactElement => {
 
   return (
     <Layout style={styles.container}>
+      <Layout style={styles.memoHeader}>
+        <Text category="h3">{title ? title.substring(0, 10) : ''}</Text>
+        <Text category="c2">{dateString(createDate)}</Text>
+      </Layout>
       <ScrollView>
-        <Layout style={styles.memoHeader}>
-          <Text category="h2">{title ? title.substring(0, 10) : ''}</Text>
-          <Text category="c2">{dateString(createDate)}</Text>
-        </Layout>
-
         <Layout style={styles.memoContent}>
           <Text style={styles.memoBody}>{body}</Text>
         </Layout>
@@ -87,10 +76,9 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   memoHeader: {
-    height: 100,
+    maxHeight: 200,
     justifyContent: 'center',
     padding: 16,
-    fontSize: 22,
     borderBottomWidth: 1,
     borderBottomColor: '#EEE'
   },
@@ -99,8 +87,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 80,
     paddingLeft: 16,
-    paddingRight: 16,
-    fontSize: 16
+    paddingRight: 16
   },
   memoBody: {
     fontSize: 15,
