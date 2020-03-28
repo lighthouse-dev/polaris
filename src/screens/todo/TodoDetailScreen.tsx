@@ -50,11 +50,9 @@ export const TodoDetailScreen = (props): React.ReactElement => {
             fill="#FF7E6D"
             style={{ marginRight: 10 }}
           />
-          {todo?.tag?.length ? (
-            ''
-          ) : (
+          {todo?.tag?.length ? null : ( // TODO: tag表示する
             <Text category="s1" style={styles.detail}>
-              {'タグを入力してください'}
+              {'Please input a tag'}
             </Text>
           )}
         </Layout>
@@ -70,15 +68,15 @@ export const TodoDetailScreen = (props): React.ReactElement => {
           />
           <Text category="s1" style={styles.detail}>
             {todo?.deadline
-              ? dateString(todo.deadline) + ' まで'
-              : '期限日を指定'}
+              ? 'By ' + dateString(todo.deadline)
+              : 'Please set an expiration date'}
           </Text>
         </Layout>
 
         {/* TODO: MEMO入力できるようにする */}
         <Layout style={styles.detailLayout}>
           <Text category="s1" style={styles.detail}>
-            {todo?.detail ? todo.detail : 'メモを入力してください'}
+            {todo?.detail ? todo.detail : 'Please input a memo'}
           </Text>
         </Layout>
       </ScrollView>
