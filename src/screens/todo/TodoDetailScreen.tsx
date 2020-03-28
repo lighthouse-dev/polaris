@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 import { Layout, Text, Icon } from '@ui-kitten/components';
 import firebase from '../../utils/firebase';
 
@@ -7,11 +7,13 @@ import { Todo } from './TodoListScreen';
 import CheckBoxItem from '../../elements/CheckBoxItem';
 import TodoBottomBar from '../../components/todo/TodoBottomBar';
 import dateString from '../../utils/getDateString';
+import EditTodoDetail from '../../components/todo/EditTodoDetail';
 
 export const TodoDetailScreen = (props): React.ReactElement => {
   const db = firebase.firestore();
   const { currentUser } = firebase.auth();
   const [todo, setTodo] = React.useState<Todo>(null);
+  const [isEditDetail, setIsEditDetail] = React.useState<boolean>(false);
 
   useEffect(() => {
     const { params } = props.navigation.state;
@@ -74,11 +76,24 @@ export const TodoDetailScreen = (props): React.ReactElement => {
         </Layout>
 
         {/* TODO: MEMO入力できるようにする */}
-        <Layout style={styles.detailLayout}>
-          <Text category="s1" style={styles.detail}>
-            {todo?.detail ? todo.detail : 'Please input a memo'}
-          </Text>
-        </Layout>
+        <TouchableHighlight
+          onPress={() => setIsEditDetail(true)}
+          underlayColor="#FFF"
+        >
+          <Layout style={styles.detailLayout}>
+            {!isEditDetail ? (
+              <Text category="s1" style={styles.detail}>
+                {todo?.detail ? todo.detail : 'Please input a memo'}
+              </Text>
+            ) : (
+              <EditTodoDetail
+                todo={todo}
+                setTodo={setTodo}
+                setIsEditDetail={setIsEditDetail}
+              />
+            )}
+          </Layout>
+        </TouchableHighlight>
       </ScrollView>
       <TodoBottomBar />
     </Layout>
@@ -120,14 +135,9 @@ const styles = StyleSheet.create({
   },
   detailLayout: {
     minHeight: 200,
-    paddingTop: 30,
-    paddingBottom: 80,
-    paddingLeft: 16,
-    paddingRight: 16,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
+    padding: 16,
+    marginVertical: 5,
+    marginHorizontal: 10,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 2 },
