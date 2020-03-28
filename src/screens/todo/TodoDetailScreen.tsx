@@ -92,11 +92,9 @@ const styles = StyleSheet.create({
   },
   titleLayout: {
     flexDirection: 'row',
+    backgroundColor: '#E7EAF3',
     minHeight: 50,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2
+    padding: 16
   },
   checkBox: {
     marginTop: 5,
@@ -104,14 +102,14 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   title: {
-    marginTop: 5,
-    marginBottom: 5,
-    marginRight: 5
+    marginVertical: 5,
+    marginRight: 5,
+    color: '#555555'
   },
   tagLayout: {
     flexDirection: 'row',
     padding: 16,
-    marginTop: 20,
+    marginTop: 5,
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
