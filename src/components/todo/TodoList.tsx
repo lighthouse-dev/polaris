@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
   todoTitleText: {
     paddingVertical: 8,
     paddingHorizontal: 5,
-    fontSize: 14
+    fontSize: 14,
+    color: '#333333'
   },
   todoCheckBox: {
     marginVertical: 8,
