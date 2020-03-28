@@ -18,7 +18,7 @@ export const AddTodo = (props: AddTodoProps): React.ReactElement => {
         {/* TODO: 期限日を指定できるようにする（カレンダー） */}
         <Input
           style={styles.todoInput}
-          placeholder="タスクを入力してください"
+          placeholder="New task"
           value={title}
           onChangeText={settitle}
         />
