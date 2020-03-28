@@ -39,7 +39,7 @@ const MemoItem = (props: Props) => {
         <View style={styles.contentLayout}>
           <Text>{memo.content.substring(0, 120)} ...</Text>
         </View>
-        {memo.tag.length ? tagItem(memo.tag) : ''}
+        {memo.tag.length ? tagItem(memo.tag) : null}
       </View>
     </TouchableHighlight>
   );
