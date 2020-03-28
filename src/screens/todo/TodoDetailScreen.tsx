@@ -41,7 +41,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
         </Text>
       </Layout>
       <ScrollView>
-        <Layout style={styles.tagLayout}>
+        <Layout style={styles.commonLayout}>
           <Icon
             name="bookmark"
             width={24}
@@ -58,7 +58,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
           )}
         </Layout>
 
-        <Layout style={styles.dateLayout}>
+        <Layout style={styles.commonLayout}>
           <Icon
             name="calendar"
             width={24}
@@ -106,25 +106,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
     color: '#555555'
   },
-  tagLayout: {
+  commonLayout: {
     flexDirection: 'row',
     padding: 16,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.2
-  },
-  dateLayout: {
-    flexDirection: 'row',
-    padding: 16,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 2 },
