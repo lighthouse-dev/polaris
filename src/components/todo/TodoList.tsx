@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight } from 'react-native';
-import { List, Layout, Text } from '@ui-kitten/components';
+import { List, Layout, Text, Icon } from '@ui-kitten/components';
 import { TodoList as TodoListType } from '../../screens/todo/TodoListScreen';
 import CheckBoxItem from '../../elements/CheckBoxItem';
 
@@ -32,17 +32,30 @@ export const TodoList = (props: TodoListProps): React.ReactElement => {
             }}
           />
         </Layout>
-        <Layout style={styles.todoTitleLayout}>
+        <Layout style={styles.todoDetailLayout}>
           <TouchableHighlight
             onPress={() => {
               props.navigation.push('TodoDetailScreen', { todo: item });
             }}
             underlayColor="#FFF"
           >
-            <Text style={styles.todoTitle}>
-              {/* convertText() 共通化 */}
-              {convertTodoTitle(item.title)}
-            </Text>
+            <Layout style={styles.todoTitleLayout}>
+              <Layout style={styles.todoTitle}>
+                <Text style={styles.todoTitleText}>
+                  {/* convertText() 共通化 */}
+                  {convertTodoTitle(item.title)}
+                </Text>
+              </Layout>
+              <Layout style={styles.todoArrowIconLayout}>
+                <Icon
+                  name="chevron-right"
+                  width={24}
+                  height={24}
+                  fill="#696969"
+                  style={styles.todoArrowIcon}
+                />
+              </Layout>
+            </Layout>
           </TouchableHighlight>
         </Layout>
       </Layout>
@@ -81,10 +94,16 @@ const styles = StyleSheet.create({
   checkBoxLayout: {
     flex: 0.1
   },
-  todoTitleLayout: {
+  todoDetailLayout: {
     flex: 1
   },
+  todoTitleLayout: {
+    flexDirection: 'row'
+  },
   todoTitle: {
+    flex: 1
+  },
+  todoTitleText: {
     paddingVertical: 8,
     paddingHorizontal: 5,
     fontSize: 14
@@ -92,6 +111,12 @@ const styles = StyleSheet.create({
   todoCheckBox: {
     marginVertical: 8,
     marginLeft: 8
+  },
+  todoArrowIconLayout: {
+    flex: 0.1
+  },
+  todoArrowIcon: {
+    marginVertical: 8
   }
 });
 
