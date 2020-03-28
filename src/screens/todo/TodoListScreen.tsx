@@ -127,9 +127,9 @@ export const TodoListScreen = (props): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingVertical: 24,
-    backgroundColor: '#FFF'
+    backgroundColor: '#E7EAF3'
   },
   title: {
     fontSize: 30,

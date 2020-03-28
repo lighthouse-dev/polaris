@@ -39,7 +39,8 @@ export const TodoList = (props: TodoListProps): React.ReactElement => {
             }}
             underlayColor="#FFF"
           >
-            <Text style={styles.todoTitle} category="p2">
+            <Text style={styles.todoTitle}>
+              {/* convertText() 共通化 */}
               {convertTodoTitle(item.title)}
             </Text>
           </TouchableHighlight>
@@ -58,18 +59,24 @@ export const TodoList = (props: TodoListProps): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    backgroundColor: '#fff'
+    width: '100%'
   },
   list: {
-    backgroundColor: '#fff'
+    backgroundColor: '#E7EAF3'
   },
   todoDate: {
     fontSize: 12,
     color: '#a2a2a2'
   },
   todoItemLayout: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 7,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1
   },
   checkBoxLayout: {
     flex: 0.1
@@ -78,14 +85,12 @@ const styles = StyleSheet.create({
     flex: 1
   },
   todoTitle: {
-    paddingTop: 9,
-    paddingBottom: 9,
-    paddingLeft: 5,
-    paddingRight: 5
+    paddingVertical: 8,
+    paddingHorizontal: 5,
+    fontSize: 14
   },
   todoCheckBox: {
-    marginTop: 8,
-    marginBottom: 8,
+    marginVertical: 8,
     marginLeft: 8
   }
 });
