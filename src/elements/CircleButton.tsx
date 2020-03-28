@@ -12,14 +12,12 @@ const CircleButton = (props: CircleButtonProps) => {
 
   return (
     <TouchableHighlight style={styles.container} underlayColor="transparent">
-      <Layout>
-        <Button
-          style={styles.button}
-          status="danger"
-          icon={StarIcon}
-          onPress={onPress}
-        />
-      </Layout>
+      <Button
+        style={styles.button}
+        status="danger"
+        icon={StarIcon}
+        onPress={onPress}
+      />
     </TouchableHighlight>
   );
 };
@@ -35,6 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     shadowOpacity: 0.3,
     shadowRadius: 3,
+    elevation: 8, // Android用Shadow
     alignItems: 'center',
     justifyContent: 'center',
     height: 48,

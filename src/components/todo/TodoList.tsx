@@ -72,7 +72,9 @@ export const TodoList = (props: TodoListProps): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    paddingVertical: 10,
+    backgroundColor: '#E7EAF3'
   },
   list: {
     backgroundColor: '#E7EAF3'
@@ -83,13 +85,15 @@ const styles = StyleSheet.create({
   },
   todoItemLayout: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
     paddingVertical: 10,
     paddingHorizontal: 7,
-    borderRadius: 12,
+    borderRadius: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.1
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 3 // Android用Shadow
   },
   checkBoxLayout: {
     flex: 0.1

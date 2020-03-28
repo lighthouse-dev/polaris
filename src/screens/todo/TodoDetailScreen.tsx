@@ -41,6 +41,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
         </Text>
       </Layout>
       <ScrollView>
+        {/* TODO: タグ機能実装 */}
         <Layout style={styles.commonLayout}>
           <Icon
             name="bookmark"
@@ -58,6 +59,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
           )}
         </Layout>
 
+        {/* TODO: 指定日入力できるようにする Calender */}
         <Layout style={styles.commonLayout}>
           <Icon
             name="calendar"
@@ -73,6 +75,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
           </Text>
         </Layout>
 
+        {/* TODO: MEMO入力できるようにする */}
         <Layout style={styles.detailLayout}>
           <Text category="s1" style={styles.detail}>
             {todo?.detail ? todo.detail : 'メモを入力してください'}
@@ -114,7 +117,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.2
+    shadowOpacity: 0.2,
+    elevation: 3 // Android用Shadow
   },
   detailLayout: {
     minHeight: 200,
@@ -129,7 +133,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.2
+    shadowOpacity: 0.2,
+    elevation: 3 // Android用Shadow
   },
   detail: {
     color: '#696969'
