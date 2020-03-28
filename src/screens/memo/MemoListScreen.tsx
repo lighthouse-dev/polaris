@@ -13,7 +13,7 @@ export type Memo = {
   index?: number;
   title: string;
   content: string;
-  tag: string;
+  tag: [];
   creator: string;
   create_date: Date;
   updater: string;

@@ -15,9 +15,10 @@ export type Todo = {
   title: string; // "内容",
   detail: string; // "詳細",
   completed: boolean; // false,
+  tag: [];
   priority: number; // 1,
   person: string; // "julee",
-  deadline: Date; //'2020-01-30',
+  deadline: Date | null; //'2020-01-30',
   creator: string; //"julee",
   create_date: Date; // '2019-12-01',
   updater: string; //"soojin",
@@ -64,8 +65,9 @@ export const TodoListScreen = (props): React.ReactElement => {
     // TODO: title以外の情報もちゃんと入るようにする
     const data: Todo = {
       title: title,
-      detail: '詳細',
+      detail: null,
       completed: false,
+      tag: [],
       priority: 1,
       person: 'julee',
       deadline: currentDate,

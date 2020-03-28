@@ -44,7 +44,7 @@ export const MemoAddScreen = (props): React.ReactElement => {
           const memo: Memo = {
             title: title,
             content: body,
-            tag: '',
+            tag: [],
             creator: currentUser.uid,
             create_date: currentDate,
             updater: currentUser.uid,
