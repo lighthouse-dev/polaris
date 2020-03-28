@@ -65,9 +65,7 @@ export const MemoListScreen = (props): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 24,
-    backgroundColor: '#FFF'
+    backgroundColor: '#E7EAF3'
   },
   card: {
     marginVertical: 10

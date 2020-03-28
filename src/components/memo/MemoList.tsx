@@ -33,15 +33,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    padding: 5,
-    backgroundColor: '#FFF'
+    paddingVertical: 10,
+    backgroundColor: '#E7EAF3'
   },
   list: {
-    backgroundColor: '#fff'
+    backgroundColor: '#E7EAF3'
   },
   card: {
-    marginVertical: 10,
-    maxHeight: 550
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    maxHeight: 550,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 3 // Android用Shadow
   }
 });
 
