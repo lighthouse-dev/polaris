@@ -26,6 +26,7 @@ export const TodoList = (props: TodoListProps): React.ReactElement => {
         <Layout style={styles.checkBoxLayout}>
           <CheckBoxItem
             checked={item.completed}
+            style={styles.todoCheckBox}
             onChange={(checked: boolean) => {
               onPress(item.key, checked);
             }}
@@ -77,7 +78,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   todoTitle: {
-    padding: 10
+    paddingTop: 9,
+    paddingBottom: 9,
+    paddingLeft: 5,
+    paddingRight: 5
+  },
+  todoCheckBox: {
+    marginTop: 8,
+    marginBottom: 8,
+    marginLeft: 8
   }
 });
 

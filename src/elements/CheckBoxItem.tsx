@@ -1,30 +1,20 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { ViewStyle, StyleProp } from 'react-native';
 import { CheckBox } from '@ui-kitten/components';
 
 export interface CheckBoxProps {
   text?: string;
   checked: boolean;
+  style: StyleProp<ViewStyle>;
   onChange: (checked: boolean) => void;
 }
 
 const CheckBoxItem = (props: CheckBoxProps) => {
-  const { text, checked, onChange } = props;
+  const { text, checked, style, onChange } = props;
 
   return (
-    <CheckBox
-      text={text}
-      checked={checked}
-      onChange={onChange}
-      style={styles.checkbox}
-    />
+    <CheckBox text={text} checked={checked} onChange={onChange} style={style} />
   );
 };
-
-const styles = StyleSheet.create({
-  checkbox: {
-    margin: 8
-  }
-});
 
 export default CheckBoxItem;
