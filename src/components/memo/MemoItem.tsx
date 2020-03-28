@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 import { Text } from '@ui-kitten/components';
-import { Memo } from '../screens/memo/MemoListScreen';
+import { Memo } from '../../screens/memo/MemoListScreen';
 
 export interface Props {
   memo: Memo;
@@ -15,7 +15,7 @@ export interface Props {
   onPress: () => void;
 }
 
-const CardItem = (props: Props) => {
+const MemoItem = (props: Props) => {
   const { memo, style, onPress } = props;
 
   return (
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CardItem;
+export default MemoItem;

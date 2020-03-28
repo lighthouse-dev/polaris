@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List } from '@ui-kitten/components';
 import { MemoList as MemoListType } from '../../screens/memo/MemoListScreen';
-import CardItem from '../../elements/CardItem';
+import MemoItem from './MemoItem';
 
 export interface Props {
   memoList: MemoListType;
@@ -10,9 +10,9 @@ export interface Props {
 }
 
 export const MemoList = (props: Props): React.ReactElement => {
-  const todoItem = ({ item }) => {
+  const memoItem = ({ item }) => {
     return (
-      <CardItem
+      <MemoItem
         memo={item}
         style={styles.card}
         onPress={() => {
@@ -24,7 +24,7 @@ export const MemoList = (props: Props): React.ReactElement => {
 
   return (
     <View style={styles.container}>
-      <List style={styles.list} data={props.memoList} renderItem={todoItem} />
+      <List style={styles.list} data={props.memoList} renderItem={memoItem} />
     </View>
   );
 };
