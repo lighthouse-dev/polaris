@@ -31,7 +31,12 @@ const TabScreen = createMaterialTopTabNavigator(
       activeTintColor: '#333333',
       inactiveTintColor: '#333333',
       style: {
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        elevation: 7 // Android用Shadow
       },
       labelStyle: {
         textAlign: 'center',
@@ -78,11 +83,7 @@ const StackNavigator = createStackNavigator({
     screen: TabScreen,
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#3F52B5',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2
+        backgroundColor: '#3F52B5'
       },
       headerTitleStyle: {
         flexGrow: 1,
