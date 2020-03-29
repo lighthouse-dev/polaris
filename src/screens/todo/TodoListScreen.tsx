@@ -114,7 +114,7 @@ export const TodoListScreen = (props): React.ReactElement => {
         {/* TODO: 完了になったタスクをどう表示させるか？ */}
         {/* TODO: 「完了したタスクを隠す」 的なフラグを作る など */}
         {isVisible ? (
-          <AddTodo onPress={addTodo} />
+          <AddTodo onPress={addTodo} onBlur={() => setIsVisible(false)} />
         ) : (
           // TODO: ボタン押した時、入力欄にカーソルが当たった状態にする
           <CircleButton iconName="plus" onPress={openAddTodo} />

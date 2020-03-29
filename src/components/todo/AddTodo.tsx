@@ -3,11 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Layout, Icon, Input } from '@ui-kitten/components';
 
 export interface AddTodoProps {
+  onBlur: () => void;
   onPress: (title: string) => void;
 }
 
 export const AddTodo = (props: AddTodoProps): React.ReactElement => {
-  const { onPress } = props;
+  const { onBlur, onPress } = props;
   const [title, setTitle] = React.useState<string>();
   const StarIcon = style => <Icon {...style} name="plus" />;
 
@@ -22,6 +23,7 @@ export const AddTodo = (props: AddTodoProps): React.ReactElement => {
           value={title}
           onChangeText={setTitle}
           autoFocus
+          onBlur={onBlur}
         />
         <Button
           style={styles.addTodoButton}
