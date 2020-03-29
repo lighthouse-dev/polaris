@@ -1,33 +1,27 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-import { Button, Layout, Icon } from '@ui-kitten/components';
-import InputItem from '../../elements/InputItem';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Button, Layout, Icon, Input } from '@ui-kitten/components';
 
 export interface AddTodoProps {
   onPress: (title: string) => void;
 }
 
 export const AddTodo = (props: AddTodoProps): React.ReactElement => {
-  const StarIcon = style => <Icon {...style} name="plus" />;
-  const [title, setTitle] = React.useState<string>();
   const { onPress } = props;
-  const todoTitleRef = React.createRef<TextInput>();
-
-  useEffect(() => {
-    todoTitleRef.current.focus();
-  }, []);
+  const [title, setTitle] = React.useState<string>();
+  const StarIcon = style => <Icon {...style} name="plus" />;
 
   return (
     // TODO: 入力欄以外のところをタップすると、　入力欄を隠す
     <View style={styles.container}>
       <Layout level="3" style={styles.modal}>
         {/* TODO: 期限日を指定できるようにする（カレンダー） */}
-        <InputItem
-          ref={todoTitleRef}
-          value={title}
-          setText={setTitle}
+        <Input
           style={styles.todoInput}
-          placeholder={'New Task'}
+          placeholder={'News Task'}
+          value={title}
+          onChangeText={setTitle}
+          autoFocus
         />
         <Button
           style={styles.addTodoButton}
@@ -36,6 +30,7 @@ export const AddTodo = (props: AddTodoProps): React.ReactElement => {
           onPress={() => {
             onPress(title);
           }}
+          disabled={!title?.length ? true : false}
         />
       </Layout>
     </View>
