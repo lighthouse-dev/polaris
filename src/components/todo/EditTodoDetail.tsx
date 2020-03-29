@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { Button } from '@ui-kitten/components';
 import firebase from '../../utils/firebase';
 
@@ -13,14 +13,20 @@ export interface Props {
 }
 
 export const EditTodoDetail = (props: Props): React.ReactElement => {
-  const { todo, setTodo, setIsEditDetail } = props;
   const db = firebase.firestore();
   const { currentUser } = firebase.auth();
+  const { todo, setTodo, setIsEditDetail } = props;
+  const todoDetailRef = React.createRef<TextInput>();
+
+  useEffect(() => {
+    todoDetailRef.current.focus();
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.inputLayout}>
         <TextInputItem
+          ref={todoDetailRef}
           style={styles.inputItem}
           value={todo?.detail}
           textAlignVertical="top"

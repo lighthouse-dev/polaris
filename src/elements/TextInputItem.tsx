@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { LegacyRef } from 'react';
 import { StyleProp, ViewStyle, TextInput } from 'react-native';
 
 export interface Props {
@@ -10,26 +10,29 @@ export interface Props {
   onChangeText: (text: string) => void;
 }
 
-const TextInputItem = (props: Props) => {
-  const {
-    value,
-    style,
-    placeholder,
-    textAlignVertical,
-    onChangeText,
-    multiline
-  } = props;
+const TextInputItem = React.forwardRef(
+  (props: Props, ref: LegacyRef<TextInput>) => {
+    const {
+      value,
+      style,
+      placeholder,
+      textAlignVertical,
+      onChangeText,
+      multiline
+    } = props;
 
-  return (
-    <TextInput
-      style={style}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
-      textAlignVertical={textAlignVertical}
-      multiline={multiline}
-    />
-  );
-};
+    return (
+      <TextInput
+        ref={ref}
+        style={style}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        textAlignVertical={textAlignVertical}
+        multiline={multiline}
+      />
+    );
+  }
+);
 
 export default TextInputItem;
