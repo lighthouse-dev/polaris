@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from '@ui-kitten/components';
-import firebase from '../../utils/firebase';
 
 import TextInputItem from '../../elements/TextInputItem';
 import { Todo } from '../../screens/todo/TodoListScreen';
@@ -13,74 +11,35 @@ export interface Props {
 }
 
 export const EditTodoDetail = (props: Props): React.ReactElement => {
-  const db = firebase.firestore();
-  const { currentUser } = firebase.auth();
   const { todo, setTodo, setIsEditDetail } = props;
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputLayout}>
-        <TextInputItem
-          style={styles.inputItem}
-          value={todo?.detail}
-          textAlignVertical="top"
-          multiline={true}
-          autoFocus={true}
-          onChangeText={text => {
-            setTodo({ ...todo, detail: text });
-          }}
-        />
-      </View>
-      <View style={styles.buttonLayout}>
-        <Button
-          style={styles.cancelButton}
-          status="basic"
-          onPress={() => setIsEditDetail(false)}
-        >
-          Cancel
-        </Button>
-        <Button
-          style={styles.saveButton}
-          status="primary"
-          onPress={() => {
-            db.collection(`groups/${currentUser.uid}:default/todos`)
-              .doc(todo.key)
-              .update({ detail: todo.detail })
-              .then(() => {
-                setIsEditDetail(false);
-              })
-              .catch(err => {
-                console.error(err);
-              });
-          }}
-        >
-          Save
-        </Button>
-      </View>
+      <TextInputItem
+        style={styles.inputItem}
+        value={todo?.detail}
+        textAlignVertical="top"
+        multiline={true}
+        autoFocus={true}
+        onBlur={() => {
+          setIsEditDetail(false);
+        }}
+        onChangeText={(text) => {
+          setTodo({ ...todo, detail: text });
+        }}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 180
-  },
-  inputLayout: {
-    flex: 1
+    flex: 1,
+    maxHeight: 400,
   },
   inputItem: {
-    height: '100%'
+    flex: 1,
   },
-  buttonLayout: {
-    flex: 0.1,
-    flexDirection: 'row'
-  },
-  cancelButton: {
-    margin: 8
-  },
-  saveButton: {
-    margin: 8
-  }
 });
 
 export default EditTodoDetail;

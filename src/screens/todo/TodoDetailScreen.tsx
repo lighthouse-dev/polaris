@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  TouchableHighlight,
+  KeyboardAvoidingView
+} from 'react-native';
 import { Layout, Text, Icon } from '@ui-kitten/components';
 import firebase from '../../utils/firebase';
 
@@ -8,6 +13,7 @@ import CheckBoxItem from '../../elements/CheckBoxItem';
 import TodoBottomBar from '../../components/todo/TodoBottomBar';
 import dateString from '../../utils/getDateString';
 import EditTodoDetail from '../../components/todo/EditTodoDetail';
+import CircleButton from '../../elements/CircleButton';
 
 export const TodoDetailScreen = (props): React.ReactElement => {
   const db = firebase.firestore();
@@ -21,7 +27,11 @@ export const TodoDetailScreen = (props): React.ReactElement => {
   }, []);
 
   return (
-    <Layout style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="height"
+      keyboardVerticalOffset={80}
+    >
       <Layout style={styles.titleLayout}>
         <CheckBoxItem
           checked={todo?.completed}
@@ -42,6 +52,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
           {todo?.title}
         </Text>
       </Layout>
+
       <ScrollView>
         {/* TODO: タグ機能実装 */}
         <Layout style={styles.commonLayout}>
@@ -95,15 +106,34 @@ export const TodoDetailScreen = (props): React.ReactElement => {
           </Layout>
         </TouchableHighlight>
       </ScrollView>
-      <TodoBottomBar />
-    </Layout>
+
+      {!isEditDetail ? (
+        <TodoBottomBar />
+      ) : (
+        <CircleButton
+          iconName="plus"
+          onPress={() => {
+            console.log(todo);
+
+            db.collection(`groups/${currentUser.uid}:default/todos`)
+              .doc(todo.key)
+              .update(todo)
+              .then(() => {
+                setIsEditDetail(false);
+              })
+              .catch(err => {
+                console.error(err);
+              });
+          }}
+        />
+      )}
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
     backgroundColor: '#E7EAF3'
   },
   titleLayout: {
