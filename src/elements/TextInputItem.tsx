@@ -9,6 +9,7 @@ interface Props {
   multiline?: boolean;
   autoFocus?: boolean;
   onChangeText: (text: string) => void;
+  onBlur?: () => void;
 }
 
 const TextInputItem = (props: Props) => {
@@ -19,7 +20,8 @@ const TextInputItem = (props: Props) => {
     textAlignVertical,
     onChangeText,
     multiline,
-    autoFocus
+    autoFocus,
+    onBlur
   } = props;
 
   return (
@@ -31,6 +33,7 @@ const TextInputItem = (props: Props) => {
       textAlignVertical={textAlignVertical}
       multiline={multiline}
       autoFocus={autoFocus}
+      onBlur={onBlur}
     />
   );
 };
