@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import ValidationText from '../../elements/ValidationText';
-import firebase from '../../utils/firebase';
+import { initFirebase } from '../../utils/firebase';
 
 class SignUpScreen extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class SignUpScreen extends React.Component {
       return false;
     }
 
-    firebase
+    initFirebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {

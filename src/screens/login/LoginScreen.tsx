@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
-import firebase from '../../utils/firebase';
+import { initFirebase } from '../../utils/firebase';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Loading from '../../elements/Loading';
 
@@ -29,7 +29,7 @@ class LoginScreen extends React.Component {
       this.setState({ isLoading: false });
     }
 
-    firebase
+    initFirebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -51,7 +51,7 @@ class LoginScreen extends React.Component {
   }
 
   handleSubmit() {
-    firebase
+    initFirebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {

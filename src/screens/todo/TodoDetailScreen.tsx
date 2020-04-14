@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Layout, Text, Icon } from '@ui-kitten/components';
-import firebase from '../../utils/firebase';
+import { updateTodoCompleted, updateTodoDetail } from '../../utils/firebase';
 
 import { Todo } from './TodoListScreen';
 import CheckBoxItem from '../../elements/CheckBoxItem';
@@ -16,8 +16,6 @@ import EditTodoDetail from '../../components/todo/EditTodoDetail';
 import CircleButton from '../../elements/CircleButton';
 
 export const TodoDetailScreen = (props): React.ReactElement => {
-  const db = firebase.firestore();
-  const { currentUser } = firebase.auth();
   const [todo, setTodo] = React.useState<Todo>(null);
   const [isEditDetail, setIsEditDetail] = React.useState<boolean>(false);
 
@@ -36,17 +34,11 @@ export const TodoDetailScreen = (props): React.ReactElement => {
         <CheckBoxItem
           checked={todo?.completed}
           style={styles.checkBox}
-          onChange={(checked: boolean) => {
-            db.collection(`groups/${currentUser.uid}:default/todos`)
-              .doc(todo.key)
-              .update({ completed: checked })
-              .then(() => {
-                setTodo({ ...todo, completed: checked });
-              })
-              .catch(err => {
-                console.error(err);
-              });
-          }}
+          onChange={(checked: boolean) =>
+            updateTodoCompleted(todo.key, checked).then(() => {
+              setTodo({ ...todo, completed: checked });
+            })
+          }
         />
         <Text category="h6" style={styles.title}>
           {todo?.title}
@@ -112,19 +104,11 @@ export const TodoDetailScreen = (props): React.ReactElement => {
       ) : (
         <CircleButton
           iconName="checkmark-outline"
-          onPress={() => {
-            console.log(todo);
-
-            db.collection(`groups/${currentUser.uid}:default/todos`)
-              .doc(todo.key)
-              .update(todo)
-              .then(() => {
-                setIsEditDetail(false);
-              })
-              .catch(err => {
-                console.error(err);
-              });
-          }}
+          onPress={() =>
+            updateTodoDetail(todo.key, todo).then(() => {
+              setIsEditDetail(false);
+            })
+          }
         />
       )}
     </KeyboardAvoidingView>

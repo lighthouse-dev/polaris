@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-navigation-stack';
 import { Layout } from '@ui-kitten/components';
-import firebase from '../../utils/firebase';
+import {
+  getTodoList,
+  addTodo,
+  updateTodoCompleted
+} from '../../utils/firebase';
 
 import TodoList from '../../components/todo/TodoList';
 import CircleButton from '../../elements/CircleButton';
@@ -26,77 +30,16 @@ export type Todo = {
 };
 
 export const TodoListScreen = (props): React.ReactElement => {
-  const db = firebase.firestore();
-  const { currentUser } = firebase.auth();
   const [todoList, setTodoList] = React.useState<TodoList | []>([]);
   const [isVisible, setIsVisible] = React.useState(false);
 
   // MemoListScreenコンポーネントのマウント時に実行
   useEffect(() => {
-    getTodoList();
+    getTodoList(setTodoList);
   }, []);
 
   const openAddTodo = () => {
     setIsVisible(true);
-  };
-
-  const getTodoList = () => {
-    // TODO: 日付でsort
-    db.collection(`groups/${currentUser.uid}:default/todos`)
-      .where('completed', '==', false)
-      .onSnapshot(
-        snapshot => {
-          const tempTodoList: TodoList = [];
-
-          snapshot.forEach(doc => {
-            tempTodoList.push({ key: doc.id, ...doc.data() } as Todo);
-          });
-
-          setTodoList(tempTodoList);
-        },
-        err => {
-          console.error(`getTodoList:-  ${err}`);
-        }
-      );
-  };
-
-  const addTodo = (title: string) => {
-    const currentDate = new Date();
-    // TODO: title以外の情報もちゃんと入るようにする
-    const data: Todo = {
-      title: title,
-      detail: null,
-      completed: false,
-      tag: [],
-      priority: 1,
-      person: 'julee',
-      deadline: currentDate,
-      creator: currentUser.uid,
-      create_date: currentDate,
-      updater: currentUser.uid,
-      update_date: currentDate
-    };
-
-    // TODO: firebase関連処理を一つのファイル（utils?）にまとめる
-    db.collection(`groups/${currentUser.uid}:default/todos`)
-      .doc()
-      .set(data)
-      .then(() => {
-        setIsVisible(false);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
-
-  const updateTodoCompleted = (key: string, checked: boolean) => {
-    db.collection(`groups/${currentUser.uid}:default/todos`)
-      .doc(key)
-      .update({ completed: checked })
-      .then(() => {})
-      .catch(err => {
-        console.error(err);
-      });
   };
 
   return (
@@ -114,7 +57,7 @@ export const TodoListScreen = (props): React.ReactElement => {
         {/* TODO: 完了になったタスクをどう表示させるか？ */}
         {/* TODO: 「完了したタスクを隠す」 的なフラグを作る など */}
         {isVisible ? (
-          <AddTodo onPress={addTodo} onBlur={() => setIsVisible(false)} />
+          <AddTodo onPress={addTodo} setIsVisible={() => setIsVisible(false)} />
         ) : (
           // TODO: ボタン押した時、入力欄にカーソルが当たった状態にする
           <CircleButton iconName="plus" onPress={openAddTodo} />

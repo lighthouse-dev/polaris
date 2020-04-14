@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
-import firebase from '../../utils/firebase';
+import { initFirebase } from '../../utils/firebase';
 
 import { Memo } from './MemoListScreen';
 import { returnMemo } from './MemoEditScreen';
@@ -12,9 +12,7 @@ export const MemoDetailScreen = (props): React.ReactElement => {
   const [memo, setMemo] = React.useState<Memo>();
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
-  const [createDate, setCreateDate] = React.useState<
-    firebase.firestore.Timestamp
-  >(null);
+  const [createDate, setCreateDate] = React.useState<any>(null);
 
   useEffect(() => {
     const { params } = props.navigation.state;
@@ -40,8 +38,8 @@ export const MemoDetailScreen = (props): React.ReactElement => {
   };
 
   const deleteMemo = () => {
-    const { currentUser } = firebase.auth();
-    firebase
+    const { currentUser } = initFirebase.auth();
+    initFirebase
       .firestore()
       .collection(`groups/${currentUser.uid}:default/memos`)
       .doc(memo.key)

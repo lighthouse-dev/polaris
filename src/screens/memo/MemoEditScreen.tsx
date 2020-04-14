@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Layout } from '@ui-kitten/components';
 import { Header } from 'react-navigation-stack';
-import firebase from '../../utils/firebase';
+import { initFirebase } from '../../utils/firebase';
 
 import CircleButton from '../../elements/CircleButton';
 import TextInputItem from '../../elements/TextInputItem';
@@ -11,16 +11,14 @@ export type returnMemo = {
   key: string;
   title: string;
   content: string;
-  createDate: firebase.firestore.Timestamp;
+  createDate: any;
 };
 
 export const MemoEditScreen = (props): React.ReactElement => {
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
   const [key, setKey] = React.useState<string>('');
-  const [createDate, setCreateDate] = React.useState<
-    firebase.firestore.Timestamp
-  >(null);
+  const [createDate, setCreateDate] = React.useState<any>(null);
 
   useEffect(() => {
     const { params } = props.navigation.state;
@@ -34,8 +32,8 @@ export const MemoEditScreen = (props): React.ReactElement => {
     // TODO
     // 1. tag機能実装
     // 2. 他の項目もちゃんと入るようにする
-    const { currentUser } = firebase.auth();
-    firebase
+    const { currentUser } = initFirebase.auth();
+    initFirebase
       .firestore()
       .collection(`groups/${currentUser.uid}:default/memos`)
       .doc(key)

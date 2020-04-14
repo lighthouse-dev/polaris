@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
-import firebase from '../../utils/firebase';
+import { initFirebase } from '../../utils/firebase';
 
 import CircleButton from '../../elements/CircleButton';
 import TextInputItem from '../../elements/TextInputItem';
@@ -9,7 +9,7 @@ import { Memo } from './MemoListScreen';
 export const MemoAddScreen = (props): React.ReactElement => {
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
-  const { currentUser } = firebase.auth();
+  const { currentUser } = initFirebase.auth();
 
   return (
     <KeyboardAvoidingView
@@ -51,7 +51,7 @@ export const MemoAddScreen = (props): React.ReactElement => {
             update_date: currentDate
           };
 
-          firebase
+          initFirebase
             .firestore()
             .collection(`groups/${currentUser.uid}:default/memos`)
             .doc()

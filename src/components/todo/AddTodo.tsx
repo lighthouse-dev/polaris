@@ -3,12 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Layout, Icon, Input } from '@ui-kitten/components';
 
 export interface AddTodoProps {
-  onBlur: () => void;
-  onPress: (title: string) => void;
+  setIsVisible: () => void;
+  onPress: (title: string) => Promise<void>;
 }
 
 export const AddTodo = (props: AddTodoProps): React.ReactElement => {
-  const { onBlur, onPress } = props;
+  const { setIsVisible, onPress } = props;
   const [title, setTitle] = React.useState<string>();
   const StarIcon = style => <Icon {...style} name="plus" />;
 
@@ -23,15 +23,13 @@ export const AddTodo = (props: AddTodoProps): React.ReactElement => {
           value={title}
           onChangeText={setTitle}
           autoFocus
-          onBlur={onBlur}
+          onBlur={setIsVisible}
         />
         <Button
           style={styles.addTodoButton}
           status="primary"
           icon={StarIcon}
-          onPress={() => {
-            onPress(title);
-          }}
+          onPress={() => onPress(title).then(() => setIsVisible())}
           disabled={!title?.length ? true : false}
         />
       </Layout>

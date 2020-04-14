@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout } from '@ui-kitten/components';
-import firebase from '../../utils/firebase';
+import { getMemoList } from '../../utils/firebase';
 
 import CircleButton from '../../elements/CircleButton';
 import { MemoList } from '../../components/memo/MemoList';
@@ -24,29 +24,8 @@ export const MemoListScreen = (props): React.ReactElement => {
   const [memoList, setMemoList] = React.useState<MemoList | []>([]);
 
   useEffect(() => {
-    getMemoList();
+    getMemoList(setMemoList);
   }, []);
-
-  const getMemoList = () => {
-    const { currentUser } = firebase.auth();
-    firebase
-      .firestore()
-      .collection(`groups/${currentUser.uid}:default/memos`)
-      .onSnapshot(
-        snapshot => {
-          const tempMemoList: MemoList = [];
-
-          snapshot.forEach(doc => {
-            tempMemoList.push({ key: doc.id, ...doc.data() } as Memo);
-          });
-
-          setMemoList(tempMemoList);
-        },
-        err => {
-          console.error(`getMemoList:-  ${err}`);
-        }
-      );
-  };
 
   return (
     <Layout style={styles.container}>
