@@ -111,7 +111,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
         <TodoBottomBar />
       ) : (
         <CircleButton
-          iconName="plus"
+          iconName="checkmark-outline"
           onPress={() => {
             console.log(todo);
 
