@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, Icon } from '@ui-kitten/components';
+import { deleteTodo } from '../../utils/firebase';
 
 export interface Props {
-  deleteTodo: () => void;
+  todoKey: string;
+  navigation: any;
 }
 
-export const TodoBottomBar = (props): React.ReactElement => {
-  const { deleteTodo } = props;
+export const TodoBottomBar = (props: Props): React.ReactElement => {
+  const { todoKey } = props;
 
   const TrashIcon = () => (
     <Icon width={25} height={25} fill={'#808080'} name="trash-2-outline" />
@@ -19,7 +21,12 @@ export const TodoBottomBar = (props): React.ReactElement => {
         style={styles.deleteButton}
         appearance="ghost"
         icon={TrashIcon}
-        onPress={deleteTodo}
+        onPress={() => {
+          // TODO: 確認アラートを出す
+          deleteTodo(todoKey).then(() => {
+            props.navigation.goBack();
+          });
+        }}
       />
     </Layout>
   );

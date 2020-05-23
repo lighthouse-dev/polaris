@@ -24,6 +24,10 @@ export const TodoDetailScreen = (props): React.ReactElement => {
     setTodo(params.todo);
   }, []);
 
+  if (!todo) {
+    return null;
+  }
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -100,7 +104,7 @@ export const TodoDetailScreen = (props): React.ReactElement => {
       </ScrollView>
 
       {!isEditDetail ? (
-        <TodoBottomBar />
+        <TodoBottomBar todoKey={todo.key} navigation={props.navigation} />
       ) : (
         <CircleButton
           iconName="checkmark-outline"

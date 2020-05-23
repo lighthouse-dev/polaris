@@ -95,6 +95,16 @@ const addTodo = (title: string): Promise<void> => {
     });
 };
 
+const deleteTodo = (key: string): Promise<void> => {
+  return db
+    .collection(`groups/${auth.currentUser.uid}:default/todos`)
+    .doc(key)
+    .delete()
+    .catch(err => {
+      console.error(err);
+    });
+};
+
 const getMemoList = (
   setMemoList: React.Dispatch<React.SetStateAction<MemoList | []>>
 ) => {
@@ -122,5 +132,6 @@ export {
   updateTodoDetail,
   getTodoList,
   addTodo,
+  deleteTodo,
   getMemoList
 };
