@@ -31,7 +31,7 @@ const MemoItem = (props: Props) => {
   };
 
   return (
-    <TouchableHighlight key={memo.index} onPress={onPress} underlayColor="#FFF">
+    <TouchableHighlight onPress={onPress} underlayColor="#FFF">
       <View style={style}>
         <View style={styles.titleLayout}>
           <Text category="h6">{memo.title}</Text>
